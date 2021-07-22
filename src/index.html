@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-    <header class="row">
-        <img src="../assets/htmlcss/General Images & Icons/background.svg" class="bg-image" alt="background image">
+    <img src="../assets/htmlcss/General Images & Icons/background.svg" class="bg-image" alt="background image">
+    <header class="row city-weather-header">
+        
         <div class="col-3 col-s-6 header-item header-item-1">
             <div class="city-select-div">
                 <img src="../assets/htmlcss/Icons for cities/perth.svg" class="city-icon" alt="Perth Icon">
@@ -81,5 +82,39 @@
             </div>
         </div>
     </header>
+    <section class="weather-list">
+        <div class="navbar row">
+            <div class="col-8 col-s-6 nav-title">Top Cities around the World</div>
+            <div class="col-4 col-s-6 nav-container">
+                <div class="nav-item selected">
+                    <img class="nav-icon" src="../assets/htmlcss/Weather Icons/sunnyIcon.svg" alt="">
+                </div>
+                <div class="nav-item">
+                    <img class="nav-icon" src="../assets/htmlcss/Weather Icons/snowflakeIcon.svg" alt="">
+                </div>
+                <div class="nav-item">
+                    <img class="nav-icon" src="../assets/htmlcss/Weather Icons/rainyIcon.svg" alt="">
+                </div>
+                <div class="nav-item">
+                    <p for="select">Display Top</p>
+                </div>
+                <div class="nav-item">
+                    <select name="numbers" id="display-select">
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="slider-container">
+            
+        </div>
+    </section>
 </body>
 </html>
