@@ -23,7 +23,6 @@ header{
     height: 350px;
     padding-top: 40px;
     padding-bottom: 40px;
-    margin-bottom: 10px;
     box-sizing: border-box;
     background-color: rgba(0, 0, 0, 0.6);
 }
@@ -184,6 +183,7 @@ select {
     font-weight: 200;
     font-size: 20px;
     text-align: center;
+    line-height: 36px;
 }
 
 .nav-container {
@@ -244,6 +244,8 @@ option {
 }
 
 .card-container {
+    list-style: none;
+    padding: 0;
     width: 100%;
     display: flex;
     justify-content: space-around;
@@ -309,15 +311,80 @@ option {
     z-index: 0;
 }
 
+.cont-list {
+    background-color: black;
+    padding: 30px;
+}
 
+.cont-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: baseline;
+    margin-bottom: 30px;
+}
 
+.cont-title {
+    font-size: 26px;
+    font-weight: 300;
+    line-height: 46px;
+}
 
+.sort-controls {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
 
+.cont-sort, .temp-sort {
+    font-size: 20px;
+    font-weight: 200;
+}
 
+.cont-sort-icon {
+    height: 0.8em;
+}
 
+.cont-grid {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 15px;
+}
 
+.cont-item {
+    background-color: #2e2e2e;
+    padding: 15px;
+    /* border-radius: 10px; */
+}
 
+.cont-item-title, .cont-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 5px;
+}
 
+.cont-temp-icon, .cont-humidity-icon {
+    height: 1em;
+}
+
+.cont-name {
+    font-size: 20px;
+    font-weight: 400;
+    color: #FFF461;
+}
+
+.cont-temp {
+    font-size: 26px;
+    font-weight: 500;
+}
+
+.cont-city-name, .cont-humidity {
+    font-size: 21px;
+    font-weight: 300;
+}
 
 /* For mobile phones: */
 [class*="col-"] {
@@ -341,6 +408,11 @@ option {
     .bg-image {
         height: 150%;
     }
+    .cont-grid {
+        grid-template-columns: 1fr 1fr;
+        column-gap: 15px;
+    }
+
 }
 
 @media only screen and (min-width: 768px) {
@@ -382,10 +454,59 @@ option {
     .bg-image {
         height: 100%;
     }
-}
-/* 
-@media only screen and (max-width: 1000px) {
-    .nav-title {
-        left: 40px;
+    .header-item{
+        margin-bottom: 10px;
     }
-} */
+    .header-item{
+        height: 400px;
+        padding-top: 40px;
+        padding-bottom: 60px;
+        box-sizing: border-box;
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+    
+    .header-item-1{
+        box-sizing: border-box;
+        padding: 40px 10px 60px 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+    .cont-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+        column-gap: 15px;
+        gap: 25px;
+    }
+    .cont-header {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 30px;
+    }
+    .sort-controls {
+        width: 30%;
+        display: flex;
+        justify-content: space-around;
+    }
+    .cont-list {
+        padding: 50px;
+    }
+}
+
+@media only screen and (max-width: 1000px) and (min-width: 768px) {
+    .cont-list{
+        padding: 40px;
+    }
+    .sort-controls{
+        width: 50%;
+    }
+    .values-div p {
+        font-size: 30px;
+        font-weight: 600;
+    }
+    .cont-city-name, .cont-humidity {
+        font-size: 18px;
+        font-weight: 300;
+    }
+}
