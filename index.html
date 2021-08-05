@@ -24,13 +24,10 @@
           <img
             src="./assets/htmlcss/Icons for cities/perth.svg"
             class="city-icon"
-            alt="Perth Icon"
+            alt="City Icon"
           />
-          <select name="cities" id="city-dropdown">
-            <option value="perth">Perth</option>
-            <option value="newyork">New York</option>
-            <option value="vienna">Vienna</option>
-          </select>
+          <input list="city-dropdown" name="city-input" id="city-input" />
+          <datalist name="cities" id="city-dropdown"> </datalist>
         </div>
         <div class="date-time-display">
           <p class="time-display">
@@ -47,23 +44,23 @@
       <div class="col-3 col-s-6 header-item header-item-2">
         <div class="temperature values-div">
           <h5>Temp &deg;C</h5>
-          <p>35 &deg;C</p>
+          <p class="tempC">35 &deg;C</p>
         </div>
         <div class="humidity values-div">
           <h5>Humidity</h5>
-          <p>26%</p>
+          <p class="humiValue">26%</p>
         </div>
         <div class="temperature values-div">
           <h5>Temp &deg;F</h5>
-          <p>78 &deg;F</p>
+          <p class="tempF">78 &deg;F</p>
         </div>
         <div class="precipitation values-div">
           <h5>Precipitation</h5>
-          <p>0%</p>
+          <p class="preciValue">0%</p>
         </div>
       </div>
       <div class="col-6 col-s-12 header-item header-item-3">
-        <div class="timeline-item timeline-item-1">
+        <div class="timeline-item">
           <p class="timeline-time">NOW</p>
           <p class="timeline-bar">|</p>
           <img
@@ -73,7 +70,7 @@
           />
           <p class="timeline-number">6</p>
         </div>
-        <div class="timeline-item timeline-item-2">
+        <div class="timeline-item">
           <p class="timeline-time">11 AM</p>
           <p class="timeline-bar">|</p>
           <img
@@ -83,7 +80,7 @@
           />
           <p class="timeline-number">7</p>
         </div>
-        <div class="timeline-item timeline-item-3">
+        <div class="timeline-item">
           <p class="timeline-time">12 PM</p>
           <p class="timeline-bar">|</p>
           <img
@@ -93,7 +90,7 @@
           />
           <p class="timeline-number">7</p>
         </div>
-        <div class="timeline-item timeline-item-4">
+        <div class="timeline-item">
           <p class="timeline-time">1 PM</p>
           <p class="timeline-bar">|</p>
           <img
@@ -103,22 +100,12 @@
           />
           <p class="timeline-number">8</p>
         </div>
-        <div class="timeline-item timeline-item-5">
+        <div class="timeline-item">
           <p class="timeline-time">2 PM</p>
           <p class="timeline-bar">|</p>
           <img
             class="timeline-icon"
             src="./assets/htmlcss/Weather Icons/windyIcon.svg"
-            alt=""
-          />
-          <p class="timeline-number">6</p>
-        </div>
-        <div class="timeline-item timeline-item-6">
-          <p class="timeline-time">3 PM</p>
-          <p class="timeline-bar">|</p>
-          <img
-            class="timeline-icon"
-            src="./assets/htmlcss/Weather Icons/cloudyIcon.svg"
             alt=""
           />
           <p class="timeline-number">6</p>
@@ -129,21 +116,21 @@
       <div class="navbar row">
         <div class="col-8 col-s-6 nav-title">Top Cities around the World</div>
         <div class="col-4 col-s-6 nav-container">
-          <div class="nav-item selected">
+          <div class="nav-item selected" id="sunny-select">
             <img
               class="nav-icon"
               src="./assets/htmlcss/Weather Icons/sunnyIcon.svg"
               alt=""
             />
           </div>
-          <div class="nav-item">
+          <div class="nav-item" id="snowflake-select">
             <img
               class="nav-icon"
               src="./assets/htmlcss/Weather Icons/snowflakeIcon.svg"
               alt=""
             />
           </div>
-          <div class="nav-item">
+          <div class="nav-item" id="rainy-select">
             <img
               class="nav-icon"
               src="./assets/htmlcss/Weather Icons/rainyIcon.svg"
@@ -166,176 +153,15 @@
         </div>
       </div>
       <div class="slider-container">
-        <div class="left-arrow-div">
+        <div class="left-arrow-div" id="slide-left">
           <img
             class="left-arrow"
             src="./assets/htmlcss/General Images & Icons/arrowUp.svg"
             alt=""
           />
         </div>
-        <ul class="card-container">
-          <li class="card">
-            <div class="card-title">
-              <h3>Perth</h3>
-              <h3>
-                <img
-                  class="card-icon"
-                  src="./assets/htmlcss/Weather Icons/sunnyIcon.svg"
-                  alt=""
-                />
-                25&nbsp;&deg;C
-              </h3>
-            </div>
-            <div class="card-content">
-              <h5>10:00 AM</h5>
-              <h5>21-July-2021</h5>
-              <p>
-                <img
-                  class="card-icon"
-                  src="./assets/htmlcss/Weather Icons/humidityIcon.svg"
-                  alt=""
-                />
-                53%
-              </p>
-              <p>
-                <img
-                  class="card-icon"
-                  src="./assets/htmlcss/Weather Icons/precipitationIcon.svg"
-                  alt=""
-                />
-                10%
-              </p>
-            </div>
-            <div class="card-city-icon-div">
-              <!-- <img
-                class="card-city-icon"
-                src="./assets/htmlcss/Icons for cities/perth.svg"
-                alt=""
-              /> -->
-            </div>
-          </li>
-          <li class="card">
-            <div class="card-title">
-              <h3>Perth</h3>
-              <h3>
-                <img
-                  class="card-icon"
-                  src="./assets/htmlcss/Weather Icons/sunnyIcon.svg"
-                  alt=""
-                />
-                25&nbsp;&deg;C
-              </h3>
-            </div>
-            <div class="card-content">
-              <h5>10:00 AM</h5>
-              <h5>21-July-2021</h5>
-              <p>
-                <img
-                  class="card-icon"
-                  src="./assets/htmlcss/Weather Icons/humidityIcon.svg"
-                  alt=""
-                />
-                53%
-              </p>
-              <p>
-                <img
-                  class="card-icon"
-                  src="./assets/htmlcss/Weather Icons/precipitationIcon.svg"
-                  alt=""
-                />
-                10%
-              </p>
-            </div>
-            <div class="card-city-icon-div">
-              <!-- <img
-                class="card-city-icon"
-                src="./assets/htmlcss/Icons for cities/perth.svg"
-                alt=""
-              /> -->
-            </div>
-          </li>
-          <li class="card">
-            <div class="card-title">
-              <h3>Perth</h3>
-              <h3>
-                <img
-                  class="card-icon"
-                  src="./assets/htmlcss/Weather Icons/sunnyIcon.svg"
-                  alt=""
-                />
-                25&nbsp;&deg;C
-              </h3>
-            </div>
-            <div class="card-content">
-              <h5>10:00 AM</h5>
-              <h5>21-July-2021</h5>
-              <p>
-                <img
-                  class="card-icon"
-                  src="./assets/htmlcss/Weather Icons/humidityIcon.svg"
-                  alt=""
-                />
-                53%
-              </p>
-              <p>
-                <img
-                  class="card-icon"
-                  src="./assets/htmlcss/Weather Icons/precipitationIcon.svg"
-                  alt=""
-                />
-                10%
-              </p>
-            </div>
-            <div class="card-city-icon-div">
-              <!-- <img
-                class="card-city-icon"
-                src="./assets/htmlcss/Icons for cities/perth.svg"
-                alt=""
-              /> -->
-            </div>
-          </li>
-          <li class="card">
-            <div class="card-title">
-              <h3>Perth</h3>
-              <h3>
-                <img
-                  class="card-icon"
-                  src="./assets/htmlcss/Weather Icons/sunnyIcon.svg"
-                  alt=""
-                />
-                25&nbsp;&deg;C
-              </h3>
-            </div>
-            <div class="card-content">
-              <h5>10:00 AM</h5>
-              <h5>21-July-2021</h5>
-              <p>
-                <img
-                  class="card-icon"
-                  src="./assets/htmlcss/Weather Icons/humidityIcon.svg"
-                  alt=""
-                />
-                53%
-              </p>
-              <p>
-                <img
-                  class="card-icon"
-                  src="./assets/htmlcss/Weather Icons/precipitationIcon.svg"
-                  alt=""
-                />
-                10%
-              </p>
-            </div>
-            <div class="card-city-icon-div">
-              <!-- <img
-                class="card-city-icon"
-                src="./assets/htmlcss/Icons for cities/perth.svg"
-                alt=""
-              /> -->
-            </div>
-          </li>
-        </ul>
-        <div class="right-arrow-div">
+        <ul class="card-container"></ul>
+        <div class="right-arrow-div" id="slide-right">
           <img
             class="right-arrow"
             src="./assets/htmlcss/General Images & Icons/arrowUp.svg"
@@ -655,5 +481,8 @@
         </li>
       </ul>
     </section>
+    <script type="module"></script>
+    <script type="application/json" src="assets/data.json"></script>
+    <script type="text/javascript" src="src/script.js"></script>
   </body>
 </html>
