@@ -206,6 +206,7 @@ const data = {
 let city = document.getElementById('city-input');
 let cityDrop = document.getElementById('city-dropdown');
 let timeDisplay = document.getElementsByClassName('time-display');
+let cardList = Object.keys(data);
 
 for (const cityKey in data) {
   let cityObject = data[cityKey];
@@ -220,6 +221,10 @@ city.addEventListener('focus', () => {
 
 city.addEventListener('change', () => {
   let key = city.value.toLowerCase();
+  if (!cardList.includes(key)) {
+    alert('Invalid City Name');
+    city.value = '';
+  }
   changeCityIcon(key);
   changeTempGrid(key);
   changeDateTime(key);
@@ -373,7 +378,7 @@ const getCardWeatherIcon = (temp) => {
 const getCardTime = (datetime) => {
   [date, time, mState] = [...datetime.split(' ')];
   [hours, minutes, seconds] = [...time.split(':')];
-  return `${hours}:${minutes} ${mState}`;
+  return `${hours}:${minutes}&nbsp;${mState}`;
 };
 
 const getCardDate = (datetime) => {
@@ -382,7 +387,6 @@ const getCardDate = (datetime) => {
   return getDate(date);
 };
 
-let cardList = Object.keys(data);
 let displayNumber = document.getElementById('display-number');
 var length = displayNumber.value;
 var weather;
@@ -500,18 +504,18 @@ const updateCities = () => {
   renderList.sort((a, b) => {
     if (param == 'sunny') {
       return (
-        parseInt(data[a].temperature.split('°')[0]) -
-        parseInt(data[b].temperature.split('°')[0])
+        parseInt(data[b].temperature.split('°')[0]) -
+        parseInt(data[a].temperature.split('°')[0])
       );
     } else if (param == 'snowflake') {
       return (
-        parseInt(data[a].precipitation.split('%')[0]) -
-        parseInt(data[b].precipitation.split('%')[0])
+        parseInt(data[b].precipitation.split('%')[0]) -
+        parseInt(data[a].precipitation.split('%')[0])
       );
     } else {
       return (
-        parseInt(data[a].humidity.split('%')[0]) -
-        parseInt(data[b].humidity.split('%')[0])
+        parseInt(data[b].humidity.split('%')[0]) -
+        parseInt(data[a].humidity.split('%')[0])
       );
     }
   });
@@ -552,5 +556,112 @@ const isOverflow = () => {
     buttonLeft.style.visibility = 'visible';
     buttonRight.style.visibility = 'visible';
     element.style.justifyContent = 'normal';
+  }
+};
+
+/*---------------------------------------------BOTTOM SECTION-------------------------------------------------------*/
+
+let contGrid = document.getElementsByClassName('cont-grid')[0];
+
+cardList.forEach((key, index) => {
+  let cityDetails = data[key];
+  let contItem = document.createElement('li');
+  contItem.setAttribute('class', 'cont-item');
+  contItem.innerHTML = `<div class="cont-item-title">
+      <div class="cont-name">${cityDetails.timeZone.split('/')[0]}</div>
+      <div class="cont-temp">
+        <img
+          class="cont-temp-icon"
+          src=${getWeatherIcon(parseInt(cityDetails.temperature.split('°')[0]))}
+          alt=""
+        />
+        ${cityDetails.temperature}
+      </div>
+    </div>
+    <div class="cont-content">
+      <div class="cont-city-name">${cityDetails.cityName},&nbsp;${getCardTime(
+    cityDetails.dateAndTime
+  )}</div>
+      <div class="cont-humidity">
+        <img
+          src="./assets/htmlcss/Weather Icons/humidityIcon.svg"
+          alt=""
+          class="cont-humidity-icon"
+        />
+        ${cityDetails.humidity}
+      </div>
+    </div>`;
+  contGrid.appendChild(contItem);
+});
+
+let contNameSort = document.getElementById('cont-name-sort');
+let tempSort = document.getElementById('temp-sort');
+let contSortIcon = document.getElementById('cont-name-sort-icon');
+let tempSortIcon = document.getElementById('temp-sort-icon');
+var tempState = 'des',
+  contState = 'asc';
+
+contNameSort.addEventListener('click', () => {
+  contState === 'asc' ? (contState = 'des') : (contState = 'asc');
+  contSortIcon.style.transform === 'rotate(180deg)'
+    ? (contSortIcon.style.transform = 'rotate(-360deg)')
+    : (contSortIcon.style.transform = 'rotate(180deg)');
+  updateGrid();
+});
+
+tempSort.addEventListener('click', () => {
+  tempState === 'asc' ? (tempState = 'des') : (tempState = 'asc');
+  tempSortIcon.style.transform === 'rotate(180deg)'
+    ? (tempSortIcon.style.transform = 'rotate(-360deg)')
+    : (tempSortIcon.style.transform = 'rotate(180deg)');
+  updateGrid();
+});
+
+const updateGrid = () => {
+  let renderList = cardList;
+  renderList.sort((a, b) => {
+    let contA = data[a].timeZone.split('/')[0];
+    let contB = data[b].timeZone.split('/')[0];
+    if (contState === 'asc' && tempState === 'asc') {
+      return (
+        contA.localeCompare(contB) ||
+        parseInt(data[a].temperature.split('°')[0]) -
+          parseInt(data[b].temperature.split('°')[0])
+      );
+    } else if (contState === 'asc' && tempState === 'des') {
+      return (
+        contA.localeCompare(contB) ||
+        parseInt(data[b].temperature.split('°')[0]) -
+          parseInt(data[a].temperature.split('°')[0])
+      );
+    } else if (contState === 'des' && tempState === 'asc') {
+      return (
+        contB.localeCompare(contA) ||
+        parseInt(data[a].temperature.split('°')[0]) -
+          parseInt(data[b].temperature.split('°')[0])
+      );
+    } else {
+      return (
+        contB.localeCompare(contA) ||
+        parseInt(data[b].temperature.split('°')[0]) -
+          parseInt(data[a].temperature.split('°')[0])
+      );
+    }
+  });
+  let gridItems = document.getElementsByClassName('cont-item');
+  for (let i = 0; i < gridItems.length; i++) {
+    gridItems[i].style.display = 'none';
+  }
+  for (let i = 0; i < 12; i++) {
+    for (let j = 0; j < gridItems.length; j++) {
+      if (
+        gridItems[j].childNodes[2].childNodes[1].textContent
+          .split(',')[0]
+          .toLowerCase() === renderList[i]
+      ) {
+        gridItems[j].style.display = 'initial';
+        gridItems[j].style.order = i;
+      }
+    }
   }
 };
