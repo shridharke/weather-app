@@ -264,7 +264,6 @@ option {
   padding: 20px;
   min-width: 300px;
   border-radius: 5px;
-  /* background-image: url(../assets/htmlcss/Icons\ for\ cities/perth.svg); */
   background-position: bottom right;
   background-size: 8em;
   background-repeat: no-repeat;
@@ -502,9 +501,6 @@ p {
     width: 100%;
   }
 
-  /* .card {
-    margin-right: 15px;
-  } */
   .left-arrow,
   .right-arrow {
     padding: 0px 20px;

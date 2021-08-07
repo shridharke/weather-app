@@ -13,13 +13,18 @@
     />
   </head>
   <body>
+    <!-- Background Image -->
     <img
       src="./assets/htmlcss/General Images & Icons/background.svg"
       class="bg-image-1 bg-image"
       alt="background image"
     />
+
+    <!---------------------------------------- TOP SECTION ------------------------------------------->
     <header class="city-weather-header">
+      <!-- City Selector -->
       <div class="col-3 col-s-6 header-item header-item-1">
+        <!-- City Input -->
         <div class="city-select-div">
           <img
             src="./assets/htmlcss/Icons for cities/perth.svg"
@@ -29,36 +34,36 @@
           <input list="city-dropdown" name="city-input" id="city-input" />
           <datalist name="cities" id="city-dropdown"> </datalist>
         </div>
+        <!-- Clock -->
         <div class="date-time-display">
-          <p class="time-display">
-            10:44:<small>55</small>
-            <img
-              class="am-state-icon"
-              src="./assets/htmlcss/General Images & Icons/amState.svg"
-              alt="AM"
-            />
-          </p>
-          <p class="date-display">21-July-2021</p>
+          <p class="time-display">Select a City</p>
+          <p class="date-display"></p>
         </div>
       </div>
+      <!-- Temperature Grid -->
       <div class="col-3 col-s-6 header-item header-item-2">
+        <!-- Temp in C -->
         <div class="temperature values-div">
           <h5>Temp &deg;C</h5>
-          <p class="tempC">35 &deg;C</p>
+          <p class="tempC">NIL</p>
         </div>
+        <!-- Humidity -->
         <div class="humidity values-div">
           <h5>Humidity</h5>
-          <p class="humiValue">26%</p>
+          <p class="humiValue">NIL</p>
         </div>
+        <!-- Temp in F -->
         <div class="temperature values-div">
           <h5>Temp &deg;F</h5>
-          <p class="tempF">78 &deg;F</p>
+          <p class="tempF">NIL</p>
         </div>
+        <!-- Precipitation -->
         <div class="precipitation values-div">
           <h5>Precipitation</h5>
-          <p class="preciValue">0%</p>
+          <p class="preciValue">NIL</p>
         </div>
       </div>
+      <!-- Timeline -->
       <div class="col-6 col-s-12 header-item header-item-3">
         <div class="timeline-item">
           <p class="timeline-time">NOW</p>
@@ -112,10 +117,16 @@
         </div>
       </div>
     </header>
+
+    <!---------------------------------------- MIDDLE SECTION ------------------------------------------->
     <section class="weather-list">
+      <!-- Section Header -->
       <div class="navbar row">
+        <!-- Section Title -->
         <div class="col-8 col-s-6 nav-title">Top Cities around the World</div>
+        <!-- Filter Controls -->
         <div class="col-4 col-s-6 nav-container">
+          <!-- Filter Icons -->
           <div class="nav-item selected" id="sunny-select">
             <img
               class="nav-icon"
@@ -137,6 +148,7 @@
               alt=""
             />
           </div>
+          <!-- Display Number -->
           <div class="nav-item">
             <label for="display-number">Display Top</label>
           </div>
@@ -152,7 +164,9 @@
           </div>
         </div>
       </div>
+      <!-- Slider Container -->
       <div class="slider-container">
+        <!-- Left Arrow -->
         <div class="left-arrow-div" id="slide-left">
           <img
             class="left-arrow"
@@ -160,7 +174,9 @@
             alt=""
           />
         </div>
+        <!-- Card Container -->
         <ul class="card-container"></ul>
+        <!-- Right Arrow -->
         <div class="right-arrow-div" id="slide-right">
           <img
             class="right-arrow"
@@ -170,9 +186,14 @@
         </div>
       </div>
     </section>
+
+    <!---------------------------------------- BOTTOM SECTION ------------------------------------------->
     <section class="cont-list">
+      <!-- Section Header -->
       <div class="cont-header">
+        <!-- Section Title -->
         <div class="cont-title">Cities across continents at a Glance</div>
+        <!-- Sort Controls -->
         <div class="sort-controls">
           <div class="cont-sort" id="cont-name-sort">
             Continent&nbsp;Name
@@ -194,10 +215,12 @@
           </div>
         </div>
       </div>
+      <!-- Continent Wise Grid -->
       <ul class="cont-grid"></ul>
     </section>
-    <script type="module"></script>
-    <script type="application/json" src="assets/data.json"></script>
+
+    <!-- SCRIPT TAGS -->
+    <!-- <script type="application/json" src="assets/data.json"></script> -->
     <script type="text/javascript" src="src/script.js"></script>
   </body>
 </html>

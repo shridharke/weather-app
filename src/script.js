@@ -222,12 +222,20 @@ city.addEventListener('focus', () => {
 city.addEventListener('change', () => {
   let key = city.value.toLowerCase();
   if (!cardList.includes(key)) {
-    alert('Invalid City Name');
-    city.value = '';
+    let cityIcon = document.getElementsByClassName('city-icon');
+    cityIcon[0].setAttribute(
+      'src',
+      `./assets/htmlcss/General%20Images%20&%20Icons/warning.svg`
+    );
+    city.value = 'Select Valid City';
+    changeTempGrid('invalid');
+    updateTime('invalid');
+    city.blur();
+    return;
   }
   changeCityIcon(key);
   changeTempGrid(key);
-  changeDateTime(key);
+  updateTime(key);
   changeTimeline(key);
   city.blur();
 });
@@ -245,6 +253,13 @@ const changeTempGrid = (key) => {
   let tempF = document.getElementsByClassName('tempF')[0];
   let humidity = document.getElementsByClassName('humiValue')[0];
   let precipitation = document.getElementsByClassName('preciValue')[0];
+  if (key === 'invalid') {
+    humidity.innerHTML = 'NIL';
+    precipitation.innerHTML = 'NIL';
+    tempC.innerHTML = 'NIL';
+    tempF.innerHTML = 'NIL';
+    return;
+  }
   humidity.innerHTML = data[key].humidity;
   precipitation.innerHTML = data[key].precipitation;
   tempC.innerHTML = data[key].temperature;
@@ -328,7 +343,7 @@ const getTimelineTime = (i, hours, mState) => {
 };
 
 const getWeatherIcon = (temp) =>
-  `./assets/htmlcss/Weather Icons/${
+  `./assets/htmlcss/Weather%20Icons/${
     temp < 0
       ? 'snowflakeIcon'
       : temp < 18
@@ -409,8 +424,8 @@ cardList.forEach((key, index) => {
       </h3>
     </div>
     <div class="card-content">
-      <h5>${getCardTime(cityDetails.dateAndTime)}</h5>
-      <h5>${getCardDate(cityDetails.dateAndTime)}</h5>
+      <h5 class="card-time">${getCardTime(cityDetails.dateAndTime)}</h5>
+      <h5 class="card-date">${getCardDate(cityDetails.dateAndTime)}</h5>
       <p>
         <img
           class="card-icon"
@@ -665,3 +680,114 @@ const updateGrid = () => {
     }
   }
 };
+
+/*---------------------------------------------TIME SECTION-------------------------------------------------------*/
+
+var startTime = new Date();
+var totalTime;
+
+// Calculate Time Engaged
+(() => {
+  setInterval(() => {
+    var endTime = new Date();
+    totalTime = endTime - startTime;
+  }, 1000);
+})();
+
+var timeUpdateID;
+var gridTimeID;
+var cardTimeID;
+
+// Updating Top Section Clock
+const updateTime = (key) => {
+  let timeDisplay = document.getElementsByClassName('time-display')[0];
+  let dateDisplay = document.getElementsByClassName('date-display')[0];
+  if (key === 'invalid') {
+    clearInterval(timeUpdateID);
+    timeDisplay.innerHTML = 'Invalid City';
+    dateDisplay.innerHTML = '';
+    return;
+  }
+  clearInterval(timeUpdateID);
+  timeUpdateID = setInterval(() => {
+    let newTimeObj = new Date(
+      new Date(data[key].dateAndTime).getTime() + totalTime
+    ).toLocaleString('en-US', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true,
+    });
+    [date, time, mState] = [...newTimeObj.split(' ')];
+    [hours, minutes, seconds] = [...time.split(':')];
+    timeDisplay.innerHTML = `${hours}:${minutes}:<small>${seconds}</small>
+  <img
+    class="am-state-icon"
+    src="./assets/htmlcss/General Images & Icons/${
+      mState === 'AM' ? 'am' : 'pm'
+    }State.svg"
+    alt="${mState}"
+  />`;
+    dateDisplay.innerHTML = getDate(date);
+  }, 1000);
+};
+
+// Updating Card Time
+(() => {
+  let cardTime = document.getElementsByClassName('card-time');
+  let cardDate = document.getElementsByClassName('card-date');
+  let cards = document.getElementsByClassName('card');
+  clearInterval(cardTimeID);
+  cardTimeID = setInterval(() => {
+    for (let i = 0; i < cards.length; i++) {
+      let newTimeObj = new Date(
+        new Date(
+          data[
+            cards[i].childNodes[0].childNodes[1].textContent.toLowerCase()
+          ].dateAndTime
+        ).getTime() + totalTime
+      ).toLocaleString('en-US', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true,
+      });
+      cardTime[i].innerHTML = getCardTime(newTimeObj);
+      cardDate[i].innerHTML = getCardDate(newTimeObj);
+    }
+  }, 1000);
+})();
+
+// Update Grid Time
+(() => {
+  let gridTime = document.getElementsByClassName('cont-city-name');
+  let gridItems = document.getElementsByClassName('cont-item');
+  clearInterval(gridTimeID);
+  gridTimeID = setInterval(() => {
+    for (let i = 0; i < gridItems.length; i++) {
+      let cityKey = gridItems[i].childNodes[2].childNodes[1].textContent
+        .split(',')[0]
+        .toLowerCase();
+      let newTimeObj = new Date(
+        new Date(data[cityKey].dateAndTime).getTime() + totalTime
+      ).toLocaleString('en-US', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true,
+      });
+      gridTime[i].innerHTML = `${data[cityKey].cityName}, ${getCardTime(
+        newTimeObj
+      )}`;
+    }
+  }, 1000);
+})();
