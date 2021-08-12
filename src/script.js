@@ -208,6 +208,7 @@ let cityDrop = document.getElementById('city-dropdown');
 let timeDisplay = document.getElementsByClassName('time-display');
 let cardList = Object.keys(data);
 
+// Adding all cities in the dropdown
 for (const cityKey in data) {
   let cityObject = data[cityKey];
   let cityElement = document.createElement('option');
@@ -219,6 +220,7 @@ city.addEventListener('focus', () => {
   city.value = '';
 });
 
+// On change listener for tracking input change
 city.addEventListener('change', () => {
   let key = city.value.toLowerCase();
   if (!cardList.includes(key)) {
@@ -240,6 +242,7 @@ city.addEventListener('change', () => {
   city.blur();
 });
 
+// City Icon Change Function
 const changeCityIcon = (key) => {
   let cityIcon = document.getElementsByClassName('city-icon');
   cityIcon[0].setAttribute(
@@ -248,6 +251,7 @@ const changeCityIcon = (key) => {
   );
 };
 
+// Temperature Grid Change Function
 const changeTempGrid = (key) => {
   let tempC = document.getElementsByClassName('tempC')[0];
   let tempF = document.getElementsByClassName('tempF')[0];
@@ -266,24 +270,9 @@ const changeTempGrid = (key) => {
   tempF.innerHTML = tempCtoF(key) + '°F';
 };
 
+// Util Functions for Date and Temperature
 const tempCtoF = (key) =>
   Math.floor((parseInt(data[key].temperature.split('°')[0]) * 9) / 5 + 32);
-
-const changeDateTime = (key) => {
-  let timeDisplay = document.getElementsByClassName('time-display')[0];
-  let dateDisplay = document.getElementsByClassName('date-display')[0];
-  [date, time, mState] = [...data[key].dateAndTime.split(' ')];
-  [hours, minutes, seconds] = [...time.split(':')];
-  timeDisplay.innerHTML = `${hours}:${minutes}:<small>${seconds}</small>
-  <img
-    class="am-state-icon"
-    src="./assets/htmlcss/General Images & Icons/${
-      mState === 'AM' ? 'am' : 'pm'
-    }State.svg"
-    alt="${mState}"
-  />`;
-  dateDisplay.innerHTML = getDate(date);
-};
 
 const getDate = (date) => {
   [month, day, year] = [...date.slice(0, -1).split('/')];
@@ -304,6 +293,7 @@ const getDate = (date) => {
   return `${day}-${months[parseInt(month) - 1]}-${year}`;
 };
 
+// Timeline Change Function
 const changeTimeline = (key) => {
   [date, time, mState] = [...data[key].dateAndTime.split(' ')];
   [hours, minutes, seconds] = [...time.split(':')];
@@ -360,6 +350,7 @@ const getWeatherIcon = (temp) =>
 const buttonRight = document.getElementById('slide-right');
 const buttonLeft = document.getElementById('slide-left');
 
+// Slider Functionality and Animation
 buttonRight.onclick = function () {
   slide('right');
 };
@@ -383,6 +374,7 @@ const slide = (direction) => {
   }, 50);
 };
 
+// Util Functions for Card Data
 const getCardWeatherIcon = (temp) => {
   let temper = parseInt(temp.split('°')[0]);
   return `./assets/htmlcss/Weather%20Icons/${
@@ -407,6 +399,7 @@ var length = displayNumber.value;
 var weather;
 let cardContainer = document.getElementsByClassName('card-container')[0];
 
+// Render All Cards Function
 cardList.forEach((key, index) => {
   let cityDetails = data[key];
   let card = document.createElement('li');
@@ -447,6 +440,7 @@ cardList.forEach((key, index) => {
   cardContainer.appendChild(card);
 });
 
+// Display Number Change
 displayNumber.addEventListener('change', () => {
   if (displayNumber.value > 10) {
     displayNumber.value = 10;
@@ -458,6 +452,7 @@ displayNumber.addEventListener('change', () => {
   isOverflow();
 });
 
+// Filter Controls Function
 let sunnySelect = document.getElementById('sunny-select');
 let snowflakeSelect = document.getElementById('snowflake-select');
 let rainySelect = document.getElementById('rainy-select');
@@ -504,6 +499,7 @@ rainySelect.onclick = () => {
   }
 };
 
+// Card Update Based on Selected Values
 const updateCities = () => {
   let param = weather;
   let renderList = cardList.filter((key) => {
@@ -556,6 +552,7 @@ const updateCities = () => {
   isOverflow();
 };
 
+// Hide/Show Arrows and Center cards if not overflowing
 const isOverflow = () => {
   element = document.getElementsByClassName('card-container')[0];
   if (
@@ -578,6 +575,7 @@ const isOverflow = () => {
 
 let contGrid = document.getElementsByClassName('cont-grid')[0];
 
+// Render All Grid Items
 cardList.forEach((key, index) => {
   let cityDetails = data[key];
   let contItem = document.createElement('li');
@@ -609,6 +607,7 @@ cardList.forEach((key, index) => {
   contGrid.appendChild(contItem);
 });
 
+// Grid Sort Controls Listener
 let contNameSort = document.getElementById('cont-name-sort');
 let tempSort = document.getElementById('temp-sort');
 let contSortIcon = document.getElementById('cont-name-sort-icon');
@@ -632,6 +631,7 @@ tempSort.addEventListener('click', () => {
   updateGrid();
 });
 
+// Update Grid based on selected Values
 const updateGrid = () => {
   let renderList = cardList;
   renderList.sort((a, b) => {
