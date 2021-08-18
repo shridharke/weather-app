@@ -203,8 +203,10 @@ const data = {
 
 /*---------------------------------------------OOP SECTION-------------------------------------------------------*/
 
+// Base Prototype containing all necessary functions
 function basePrototype() {}
 
+// City Constructor for having the properties of current selected city
 function SelectedCityClass(key) {
   this.cityName = data[key].cityName;
   this.dateAndTime = data[key].dateAndTime;
@@ -215,6 +217,7 @@ function SelectedCityClass(key) {
   this.nextFiveHrs = data[key].nextFiveHrs;
 }
 
+// Prototypical Inheritance to access the funtions
 SelectedCityClass.prototype = new basePrototype();
 SelectedCityClass.prototype.constructor = SelectedCityClass;
 
@@ -251,6 +254,7 @@ city.addEventListener('change', () => {
     city.blur();
     return;
   }
+  // New Object Created for city change
   selectedCity = new SelectedCityClass(key);
   selectedCity.changeCityIcon();
   selectedCity.changeTempGrid();
