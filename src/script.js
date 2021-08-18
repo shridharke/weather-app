@@ -201,12 +201,30 @@ const data = {
   },
 };
 
+/*---------------------------------------------OOP SECTION-------------------------------------------------------*/
+
+function basePrototype() {}
+
+function SelectedCityClass(key) {
+  this.cityName = data[key].cityName;
+  this.dateAndTime = data[key].dateAndTime;
+  this.timeZone = data[key].timeZone;
+  this.temperature = data[key].temperature;
+  this.humidity = data[key].humidity;
+  this.precipitation = data[key].precipitation;
+  this.nextFiveHrs = data[key].nextFiveHrs;
+}
+
+SelectedCityClass.prototype = new basePrototype();
+SelectedCityClass.prototype.constructor = SelectedCityClass;
+
 /*---------------------------------------------TOP SECTION-------------------------------------------------------*/
 
 let city = document.getElementById('city-input');
 let cityDrop = document.getElementById('city-dropdown');
 let timeDisplay = document.getElementsByClassName('time-display');
 let cardList = Object.keys(data);
+let selectedCity = null;
 
 // Adding all cities in the dropdown
 for (const cityKey in data) {
@@ -230,49 +248,41 @@ city.addEventListener('change', () => {
       `./assets/htmlcss/General%20Images%20&%20Icons/warning.svg`
     );
     city.value = 'Select Valid City';
-    changeTempGrid('invalid');
-    updateTime('invalid');
     city.blur();
     return;
   }
-  changeCityIcon(key);
-  changeTempGrid(key);
-  updateTime(key);
-  changeTimeline(key);
+  selectedCity = new SelectedCityClass(key);
+  selectedCity.changeCityIcon();
+  selectedCity.changeTempGrid();
+  selectedCity.updateTime();
+  selectedCity.changeTimeline();
   city.blur();
 });
 
 // City Icon Change Function
-const changeCityIcon = (key) => {
+basePrototype.prototype.changeCityIcon = function () {
   let cityIcon = document.getElementsByClassName('city-icon');
   cityIcon[0].setAttribute(
     'src',
-    `./assets/htmlcss/Icons for cities/${key}.svg`
+    `./assets/htmlcss/Icons for cities/${this.cityName.toLowerCase()}.svg`
   );
 };
 
 // Temperature Grid Change Function
-const changeTempGrid = (key) => {
+basePrototype.prototype.changeTempGrid = function () {
   let tempC = document.getElementsByClassName('tempC')[0];
   let tempF = document.getElementsByClassName('tempF')[0];
   let humidity = document.getElementsByClassName('humiValue')[0];
   let precipitation = document.getElementsByClassName('preciValue')[0];
-  if (key === 'invalid') {
-    humidity.innerHTML = 'NIL';
-    precipitation.innerHTML = 'NIL';
-    tempC.innerHTML = 'NIL';
-    tempF.innerHTML = 'NIL';
-    return;
-  }
-  humidity.innerHTML = data[key].humidity;
-  precipitation.innerHTML = data[key].precipitation;
-  tempC.innerHTML = data[key].temperature;
-  tempF.innerHTML = tempCtoF(key) + '°F';
+  humidity.innerHTML = this.humidity;
+  precipitation.innerHTML = this.precipitation;
+  tempC.innerHTML = this.temperature;
+  tempF.innerHTML = tempCtoF(this.temperature) + '°F';
 };
 
 // Util Functions for Date and Temperature
-const tempCtoF = (key) =>
-  Math.floor((parseInt(data[key].temperature.split('°')[0]) * 9) / 5 + 32);
+const tempCtoF = (tempInC) =>
+  Math.floor((parseInt(tempInC.split('°')[0]) * 9) / 5 + 32);
 
 const getDate = (date) => {
   [month, day, year] = [...date.slice(0, -1).split('/')];
@@ -294,18 +304,18 @@ const getDate = (date) => {
 };
 
 // Timeline Change Function
-const changeTimeline = (key) => {
-  [date, time, mState] = [...data[key].dateAndTime.split(' ')];
+basePrototype.prototype.changeTimeline = function () {
+  [date, time, mState] = [...this.dateAndTime.split(' ')];
   [hours, minutes, seconds] = [...time.split(':')];
-  let temperatures = data[key].nextFiveHrs;
+  let temperatures = this.nextFiveHrs;
   let timeline = document.getElementsByClassName('header-item-3')[0];
   let now = timeline.childNodes[1];
   now.childNodes[1].innerHTML = 'NOW';
   now.childNodes[5].setAttribute(
     'src',
-    getWeatherIcon(parseInt(data[key].temperature.split('°')[0]))
+    getWeatherIcon(parseInt(this.temperature.split('°')[0]))
   );
-  now.childNodes[7].innerHTML = data[key].temperature;
+  now.childNodes[7].innerHTML = this.temperature;
   for (let i = 1; i < timeline.childElementCount; i++) {
     let element = timeline.childNodes[2 * i + 1];
     let temp = temperatures[i - 1];
@@ -699,19 +709,13 @@ var gridTimeID;
 var cardTimeID;
 
 // Updating Top Section Clock
-const updateTime = (key) => {
+basePrototype.prototype.updateTime = function () {
   let timeDisplay = document.getElementsByClassName('time-display')[0];
   let dateDisplay = document.getElementsByClassName('date-display')[0];
-  if (key === 'invalid') {
-    clearInterval(timeUpdateID);
-    timeDisplay.innerHTML = 'Invalid City';
-    dateDisplay.innerHTML = '';
-    return;
-  }
   clearInterval(timeUpdateID);
   timeUpdateID = setInterval(() => {
     let newTimeObj = new Date(
-      new Date(data[key].dateAndTime).getTime() + totalTime
+      new Date(this.dateAndTime).getTime() + totalTime
     ).toLocaleString('en-US', {
       day: '2-digit',
       month: '2-digit',
