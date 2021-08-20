@@ -204,22 +204,99 @@ const data = {
 /*---------------------------------------------OOP SECTION-------------------------------------------------------*/
 
 // Base Prototype containing all necessary functions
-function basePrototype() {}
+class basePrototype {
+  constructor() {}
+  // City Icon Change Function
+  changeCityIcon() {
+    let cityIcon = document.getElementsByClassName('city-icon');
+    cityIcon[0].setAttribute(
+      'src',
+      `./assets/htmlcss/Icons for cities/${this.cityName.toLowerCase()}.svg`
+    );
+  }
+  // Temperature Grid Change Function
+  changeTempGrid() {
+    let tempC = document.getElementsByClassName('tempC')[0];
+    let tempF = document.getElementsByClassName('tempF')[0];
+    let humidity = document.getElementsByClassName('humiValue')[0];
+    let precipitation = document.getElementsByClassName('preciValue')[0];
+    humidity.innerHTML = this.humidity;
+    precipitation.innerHTML = this.precipitation;
+    tempC.innerHTML = this.temperature;
+    tempF.innerHTML = tempCtoF(this.temperature) + '°F';
+  }
+  // Timeline Change Function
+  changeTimeline() {
+    [date, time, mState] = [...this.dateAndTime.split(' ')];
+    [hours, minutes, seconds] = [...time.split(':')];
+    let temperatures = this.nextFiveHrs;
+    let timeline = document.getElementsByClassName('header-item-3')[0];
+    let now = timeline.childNodes[1];
+    now.childNodes[1].innerHTML = 'NOW';
+    now.childNodes[5].setAttribute(
+      'src',
+      getWeatherIcon(parseInt(this.temperature.split('°')[0]))
+    );
+    now.childNodes[7].innerHTML = this.temperature;
+    for (let i = 1; i < timeline.childElementCount; i++) {
+      let element = timeline.childNodes[2 * i + 1];
+      let temp = temperatures[i - 1];
+      element.childNodes[1].innerHTML = getTimelineTime(i, hours, mState);
+      element.childNodes[5].setAttribute(
+        'src',
+        getWeatherIcon(parseInt(temp.split('°')[0]))
+      );
+      element.childNodes[7].innerHTML = temp;
+    }
+  }
+  // Updating Top Section Clock
+  updateTime() {
+    let timeDisplay = document.getElementsByClassName('time-display')[0];
+    let dateDisplay = document.getElementsByClassName('date-display')[0];
+    clearInterval(timeUpdateID);
+    timeUpdateID = setInterval(() => {
+      let newTimeObj = new Date(
+        new Date(this.dateAndTime).getTime() + totalTime
+      ).toLocaleString('en-US', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true,
+      });
+      [date, time, mState] = [...newTimeObj.split(' ')];
+      [hours, minutes, seconds] = [...time.split(':')];
+      timeDisplay.innerHTML = `${hours}:${minutes}:<small>${seconds}</small>
+  <img
+    class="am-state-icon"
+    src="./assets/htmlcss/General Images & Icons/${
+      mState === 'AM' ? 'am' : 'pm'
+    }State.svg"
+    alt="${mState}"
+  />`;
+      dateDisplay.innerHTML = getDate(date);
+    }, 1000);
+  }
+}
 
 // City Constructor for having the properties of current selected city
-function SelectedCityClass(key) {
-  this.cityName = data[key].cityName;
-  this.dateAndTime = data[key].dateAndTime;
-  this.timeZone = data[key].timeZone;
-  this.temperature = data[key].temperature;
-  this.humidity = data[key].humidity;
-  this.precipitation = data[key].precipitation;
-  this.nextFiveHrs = data[key].nextFiveHrs;
+class SelectedCityClass extends basePrototype {
+  constructor(key) {
+    super();
+    this.cityName = data[key].cityName;
+    this.dateAndTime = data[key].dateAndTime;
+    this.timeZone = data[key].timeZone;
+    this.temperature = data[key].temperature;
+    this.humidity = data[key].humidity;
+    this.precipitation = data[key].precipitation;
+    this.nextFiveHrs = data[key].nextFiveHrs;
+  }
 }
 
 // Prototypical Inheritance to access the funtions
-SelectedCityClass.prototype = new basePrototype();
-SelectedCityClass.prototype.constructor = SelectedCityClass;
+// SelectedCityClass.prototype = new basePrototype();
 
 /*---------------------------------------------TOP SECTION-------------------------------------------------------*/
 
@@ -263,27 +340,6 @@ city.addEventListener('change', () => {
   city.blur();
 });
 
-// City Icon Change Function
-basePrototype.prototype.changeCityIcon = function () {
-  let cityIcon = document.getElementsByClassName('city-icon');
-  cityIcon[0].setAttribute(
-    'src',
-    `./assets/htmlcss/Icons for cities/${this.cityName.toLowerCase()}.svg`
-  );
-};
-
-// Temperature Grid Change Function
-basePrototype.prototype.changeTempGrid = function () {
-  let tempC = document.getElementsByClassName('tempC')[0];
-  let tempF = document.getElementsByClassName('tempF')[0];
-  let humidity = document.getElementsByClassName('humiValue')[0];
-  let precipitation = document.getElementsByClassName('preciValue')[0];
-  humidity.innerHTML = this.humidity;
-  precipitation.innerHTML = this.precipitation;
-  tempC.innerHTML = this.temperature;
-  tempF.innerHTML = tempCtoF(this.temperature) + '°F';
-};
-
 // Util Functions for Date and Temperature
 const tempCtoF = (tempInC) =>
   Math.floor((parseInt(tempInC.split('°')[0]) * 9) / 5 + 32);
@@ -305,31 +361,6 @@ const getDate = (date) => {
     'Dec',
   ];
   return `${day}-${months[parseInt(month) - 1]}-${year}`;
-};
-
-// Timeline Change Function
-basePrototype.prototype.changeTimeline = function () {
-  [date, time, mState] = [...this.dateAndTime.split(' ')];
-  [hours, minutes, seconds] = [...time.split(':')];
-  let temperatures = this.nextFiveHrs;
-  let timeline = document.getElementsByClassName('header-item-3')[0];
-  let now = timeline.childNodes[1];
-  now.childNodes[1].innerHTML = 'NOW';
-  now.childNodes[5].setAttribute(
-    'src',
-    getWeatherIcon(parseInt(this.temperature.split('°')[0]))
-  );
-  now.childNodes[7].innerHTML = this.temperature;
-  for (let i = 1; i < timeline.childElementCount; i++) {
-    let element = timeline.childNodes[2 * i + 1];
-    let temp = temperatures[i - 1];
-    element.childNodes[1].innerHTML = getTimelineTime(i, hours, mState);
-    element.childNodes[5].setAttribute(
-      'src',
-      getWeatherIcon(parseInt(temp.split('°')[0]))
-    );
-    element.childNodes[7].innerHTML = temp;
-  }
 };
 
 const getTimelineTime = (i, hours, mState) => {
@@ -711,37 +742,6 @@ var totalTime;
 var timeUpdateID;
 var gridTimeID;
 var cardTimeID;
-
-// Updating Top Section Clock
-basePrototype.prototype.updateTime = function () {
-  let timeDisplay = document.getElementsByClassName('time-display')[0];
-  let dateDisplay = document.getElementsByClassName('date-display')[0];
-  clearInterval(timeUpdateID);
-  timeUpdateID = setInterval(() => {
-    let newTimeObj = new Date(
-      new Date(this.dateAndTime).getTime() + totalTime
-    ).toLocaleString('en-US', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-      hour12: true,
-    });
-    [date, time, mState] = [...newTimeObj.split(' ')];
-    [hours, minutes, seconds] = [...time.split(':')];
-    timeDisplay.innerHTML = `${hours}:${minutes}:<small>${seconds}</small>
-  <img
-    class="am-state-icon"
-    src="./assets/htmlcss/General Images & Icons/${
-      mState === 'AM' ? 'am' : 'pm'
-    }State.svg"
-    alt="${mState}"
-  />`;
-    dateDisplay.innerHTML = getDate(date);
-  }, 1000);
-};
 
 // Updating Card Time
 (() => {
