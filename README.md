@@ -12,18 +12,21 @@ The Application consists of three sections in which the first one displays the w
 
 ## Features
 
-- ### Weather for Selected City
+- #### Weather for Selected City
 
-  The realtime weather for the selected city from the dropdown will be displayed along with the current time at the city and the predicted weather for next five hours.
+The realtime weather for the selected city from the dropdown will be displayed along with the current time at the city and the predicted weather for next five hours.
+  
   ![topSection](assets/topSection.png)
 
-- ### User Preferred List of Cities
+- #### User Preferred List of Cities
 
-  The List of Cities will be displayed based on the weather parameter(Sunny, Rainy or Snowy) preferred by the user. The Number of Cities to be Displayed can also be changed byb the user.
+The List of Cities will be displayed based on the weather parameter(Sunny, Rainy or Snowy) preferred by the user. The Number of Cities to be Displayed can also be changed byb the user.
+  
   ![middleSection](assets/middleSection.png)
 
-- ### Continent Wise List of Cities
-  The List of Cities will be displayed based on the Continent Location. The Cities will be grouped based on Continent and they can be sorted by user preference and that subgroup can be sorted based on temperature.
+- #### Continent Wise List of Cities
+The List of Cities will be displayed based on the Continent Location. The Cities will be grouped based on Continent and they can be sorted by user preference and that subgroup can be sorted based on temperature.
+  
   ![bottomSection](assets/bottomSection.png)
 
 ## Website Screenshot
