@@ -1,205 +1,55 @@
 /*------------------------------------------------DATA-------------------------------------------------------*/
 
-const data = {
-  nome: {
-    cityName: 'Nome',
-    dateAndTime: '3/31/2020, 9:21:46 PM',
-    timeZone: 'America/Nome',
-    temperature: '4°C',
-    humidity: '91%',
-    precipitation: '8%',
-    nextFiveHrs: ['6°C', '7°C', '11°C', '2°C'],
-  },
-  newyork: {
-    cityName: 'NewYork',
-    dateAndTime: '4/1/2020, 1:21:46 AM',
-    timeZone: 'America/New_york',
-    temperature: '23°C',
-    humidity: '52%',
-    precipitation: '46%',
-    nextFiveHrs: ['18°C', '20°C', '18°C', '17°C'],
-  },
-  jamaica: {
-    cityName: 'Jamaica',
-    dateAndTime: '4/1/2020, 12:21:46 AM',
-    timeZone: 'America/Jamaica',
-    temperature: '29°C',
-    humidity: '39%',
-    precipitation: '58%',
-    nextFiveHrs: ['24°C', '27°C', '28°C', '24°C'],
-  },
-  losangeles: {
-    cityName: 'LosAngeles',
-    dateAndTime: '3/31/2020, 10:21:46 PM',
-    timeZone: 'America/Los_Angeles',
-    temperature: '23°C',
-    humidity: '52%',
-    precipitation: '46%',
-    nextFiveHrs: ['19°C', '21°C', '23°C', '18°C'],
-  },
-  winnipeg: {
-    cityName: 'Winnipeg',
-    dateAndTime: '4/1/2020, 12:21:46 AM',
-    timeZone: 'America/Winnipeg',
-    temperature: '9°C',
-    humidity: '81%',
-    precipitation: '18%',
-    nextFiveHrs: ['3°C', '7°C', '4°C', '-1°C'],
-  },
-  juba: {
-    cityName: 'Juba',
-    dateAndTime: '4/1/2020, 8:21:46 AM',
-    timeZone: 'Africa/Juba',
-    temperature: '18°C',
-    humidity: '62%',
-    precipitation: '36%',
-    nextFiveHrs: ['37°C', '41°C', '38°C', '37°C'],
-  },
-  maseru: {
-    cityName: 'Maseru',
-    dateAndTime: '4/1/2020, 7:21:46 AM',
-    timeZone: 'Africa/Maseru',
-    temperature: '43°C',
-    humidity: '10%',
-    precipitation: '86%',
-    nextFiveHrs: ['17°C', '17°C', '19°C', '15°C'],
-  },
-  london: {
-    cityName: 'London',
-    dateAndTime: '4/1/2020, 6:21:46 AM',
-    timeZone: 'Europe/London',
-    temperature: '7°C',
-    humidity: '85%',
-    precipitation: '14%',
-    nextFiveHrs: ['-7°C', '-6°C', '-5°C', '-10°C'],
-  },
-  vienna: {
-    cityName: 'Vienna',
-    dateAndTime: '4/1/2020, 7:21:46 AM',
-    timeZone: 'Europe/Vienna',
-    temperature: '10°C',
-    humidity: '79%',
-    precipitation: '20%',
-    nextFiveHrs: ['-1°C', '-1°C', '4°C', '-2°C'],
-  },
-  moscow: {
-    cityName: 'Moscow',
-    dateAndTime: '4/1/2020, 8:21:46 AM',
-    timeZone: 'Europe/Moscow',
-    temperature: '11°C',
-    humidity: '77%',
-    precipitation: '22%',
-    nextFiveHrs: ['12°C', '14°C', '15°C', '8°C'],
-  },
-  dublin: {
-    cityName: 'Dublin',
-    dateAndTime: '4/1/2020, 6:21:46 AM',
-    timeZone: 'Europe/Dublin',
-    temperature: '15°C',
-    humidity: '68%',
-    precipitation: '30%',
-    nextFiveHrs: ['24°C', '28°C', '29°C', '21°C'],
-  },
-  karachi: {
-    cityName: 'Karachi',
-    dateAndTime: '4/1/2020, 10:21:46 AM',
-    timeZone: 'Asia/Karachi',
-    temperature: '25°C',
-    humidity: '47%',
-    precipitation: '50%',
-    nextFiveHrs: ['21°C', '24°C', '21°C', '19°C'],
-  },
-  kolkata: {
-    cityName: 'Kolkata',
-    dateAndTime: '4/1/2020, 10:51:46 AM',
-    timeZone: 'Asia/Kolkata',
-    temperature: '34°C',
-    humidity: '29%',
-    precipitation: '68%',
-    nextFiveHrs: ['33°C', '35°C', '37°C', '32°C'],
-  },
-  yangon: {
-    cityName: 'Yangon',
-    dateAndTime: '4/1/2020, 11:51:46 AM',
-    timeZone: 'Asia/Yangon',
-    temperature: '24°C',
-    humidity: '50%',
-    precipitation: '48%',
-    nextFiveHrs: ['31°C', '32°C', '36°C', '27°C'],
-  },
-  bangkok: {
-    cityName: 'BangKok',
-    dateAndTime: '4/1/2020, 12:21:46 PM',
-    timeZone: 'Asia/BangKok',
-    temperature: '32°C',
-    humidity: '33%',
-    precipitation: '64%',
-    nextFiveHrs: ['32°C', '34°C', '32°C', '32°C'],
-  },
-  seoul: {
-    cityName: 'Seoul',
-    dateAndTime: '4/1/2020, 2:21:46 PM',
-    timeZone: 'Asia/Seoul',
-    temperature: '6°C',
-    humidity: '87%',
-    precipitation: '12%',
-    nextFiveHrs: ['1°C', '1°C', '3°C', '0°C'],
-  },
-  anadyr: {
-    cityName: 'Anadyr',
-    dateAndTime: '4/1/2020, 5:21:46 PM',
-    timeZone: 'Asia/Anadyr',
-    temperature: '-2°C',
-    humidity: '100%',
-    precipitation: '0%',
-    nextFiveHrs: ['-1°C', '3°C', '-1°C', '-3°C'],
-  },
-  brokenhill: {
-    cityName: 'BrokenHill',
-    dateAndTime: '4/1/2020, 3:51:46 PM',
-    timeZone: 'Australia/Broken_Hill',
-    temperature: '10°C',
-    humidity: '79%',
-    precipitation: '20%',
-    nextFiveHrs: ['17°C', '21°C', '22°C', '15°C'],
-  },
-  perth: {
-    cityName: 'Perth',
-    dateAndTime: '4/1/2020, 1:21:46 PM',
-    timeZone: 'Australia/Perth',
-    temperature: '18°C',
-    humidity: '62%',
-    precipitation: '36%',
-    nextFiveHrs: ['6°C', '10°C', '11°C', '6°C'],
-  },
-  auckland: {
-    cityName: 'Auckland',
-    dateAndTime: '4/1/2020, 6:21:46 PM',
-    timeZone: 'Pacific/Auckland',
-    temperature: '17°C',
-    humidity: '64%',
-    precipitation: '34%',
-    nextFiveHrs: ['17°C', '19°C', '18°C', '17°C'],
-  },
-  vostok: {
-    cityName: 'Vostok',
-    dateAndTime: '4/1/2020, 11:21:46 AM',
-    timeZone: 'Antarctica/Vostok',
-    temperature: '-61°C',
-    humidity: '100%',
-    precipitation: '0%',
-    nextFiveHrs: ['-64°C', '-59°C', '-64°C', '-68°C'],
-  },
-  troll: {
-    cityName: 'Troll',
-    dateAndTime: '4/1/2020, 7:21:46 AM',
-    timeZone: 'Antarctica/Troll',
-    temperature: '-52°C',
-    humidity: '100%',
-    precipitation: '0%',
-    nextFiveHrs: ['-70°C', '-70°C', '-66°C', '-71°C'],
-  },
+//Fetching Data of all timezone and cities
+var requestOptions = {
+  method: 'GET',
+  redirect: 'follow',
 };
+
+let data = {};
+fetch('https://soliton.glitch.me/all-timezone-cities', requestOptions)
+  .then((response) => response.text())
+  .then((result) => JSON.parse(result))
+  .then((jData) =>
+    jData.forEach((item) => (data[item.cityName.toLowerCase()] = item))
+  )
+  .then((res) => initialise())
+  .catch((error) => console.log('error', error));
+
+//Fetching Next Five Hour Values of Cities
+function getNextValues(cityName) {
+  var requestOptionsCityName = {
+    method: 'GET',
+    redirect: 'follow',
+  };
+  let url = `https://soliton.glitch.me?city=${cityName}`;
+  fetch(url, requestOptionsCityName)
+    .then((response) => response.text())
+    .then((result) => fetchNextValues(JSON.parse(result)))
+    .catch((error) => console.log('error', error));
+}
+
+function fetchNextValues(resObj) {
+  var myHeaders = new Headers();
+  myHeaders.append('Content-Type', 'application/json');
+
+  var raw = JSON.stringify({ ...resObj, hours: 4 });
+
+  var requestOptionsNextValues = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow',
+  };
+
+  fetch('https://soliton.glitch.me/hourly-forecast', requestOptionsNextValues)
+    .then((response) => response.text())
+    .then(
+      (result) => (selectedCity.nextFiveHrs = JSON.parse(result).temperature)
+    )
+    .then((res) => selectedCity.changeTimeline())
+    .catch((error) => console.log('error', error));
+}
 
 /*---------------------------------------------OOP SECTION-------------------------------------------------------*/
 
@@ -283,7 +133,7 @@ class basePrototype {
 
 // City Constructor for having the properties of current selected city
 class SelectedCityClass extends basePrototype {
-  constructor(key) {
+  constructor(key, nextValues) {
     super();
     this.cityName = data[key].cityName;
     this.dateAndTime = data[key].dateAndTime;
@@ -291,7 +141,7 @@ class SelectedCityClass extends basePrototype {
     this.temperature = data[key].temperature;
     this.humidity = data[key].humidity;
     this.precipitation = data[key].precipitation;
-    this.nextFiveHrs = data[key].nextFiveHrs;
+    this.nextFiveHrs;
   }
 }
 
@@ -303,15 +153,90 @@ class SelectedCityClass extends basePrototype {
 let city = document.getElementById('city-input');
 let cityDrop = document.getElementById('city-dropdown');
 let timeDisplay = document.getElementsByClassName('time-display');
-let cardList = Object.keys(data);
 let selectedCity = null;
+let cardList;
 
 // Adding all cities in the dropdown
-for (const cityKey in data) {
-  let cityObject = data[cityKey];
-  let cityElement = document.createElement('option');
-  cityElement.setAttribute('value', cityObject.cityName);
-  cityDrop.appendChild(cityElement);
+
+function initialise() {
+  cardList = Object.keys(data);
+  for (const cityKey in data) {
+    let cityObject = data[cityKey];
+    let cityElement = document.createElement('option');
+    cityElement.setAttribute('value', cityObject.cityName);
+    cityDrop.appendChild(cityElement);
+  }
+  cardList.forEach((key, index) => {
+    let cityDetails = data[key];
+    let card = document.createElement('li');
+    card.setAttribute('class', 'card');
+    card.classList.add(`card-${index}`);
+    card.innerHTML = `<div class="card-title">
+        <h3>${cityDetails.cityName}</h3>
+        <h3>
+          <img
+            class="card-icon"
+            src=${getCardWeatherIcon(cityDetails.temperature)}
+            alt=""
+          />
+          ${cityDetails.temperature}
+        </h3>
+      </div>
+      <div class="card-content">
+        <h5 class="card-time">${getCardTime(cityDetails.dateAndTime)}</h5>
+        <h5 class="card-date">${getCardDate(cityDetails.dateAndTime)}</h5>
+        <p>
+          <img
+            class="card-icon"
+            src="./assets/htmlcss/Weather Icons/humidityIcon.svg"
+            alt=""
+          />
+          ${cityDetails.humidity}
+        </p>
+        <p>
+          <img
+            class="card-icon"
+            src="./assets/htmlcss/Weather Icons/precipitationIcon.svg"
+            alt=""
+          />
+          ${cityDetails.precipitation}
+        </p>
+      </div>`;
+    card.style.backgroundImage = `url('../assets/htmlcss/Icons for cities/${key}.svg')`;
+    cardContainer.appendChild(card);
+  });
+  cardList.forEach((key, index) => {
+    let cityDetails = data[key];
+    let contItem = document.createElement('li');
+    contItem.setAttribute('class', 'cont-item');
+    contItem.innerHTML = `<div class="cont-item-title">
+        <div class="cont-name">${cityDetails.timeZone.split('/')[0]}</div>
+        <div class="cont-temp">
+          <img
+            class="cont-temp-icon"
+            src=${getWeatherIcon(
+              parseInt(cityDetails.temperature.split('°')[0])
+            )}
+            alt=""
+          />
+          ${cityDetails.temperature}
+        </div>
+      </div>
+      <div class="cont-content">
+        <div class="cont-city-name">${cityDetails.cityName},&nbsp;${getCardTime(
+      cityDetails.dateAndTime
+    )}</div>
+        <div class="cont-humidity">
+          <img
+            src="./assets/htmlcss/Weather Icons/humidityIcon.svg"
+            alt=""
+            class="cont-humidity-icon"
+          />
+          ${cityDetails.humidity}
+        </div>
+      </div>`;
+    contGrid.appendChild(contItem);
+  });
 }
 
 city.addEventListener('focus', () => {
@@ -333,10 +258,10 @@ city.addEventListener('change', () => {
   }
   // New Object Created for city change
   selectedCity = new SelectedCityClass(key);
+  getNextValues(city.value);
   selectedCity.changeCityIcon();
   selectedCity.changeTempGrid();
   selectedCity.updateTime();
-  selectedCity.changeTimeline();
   city.blur();
 });
 
@@ -445,45 +370,6 @@ var weather;
 let cardContainer = document.getElementsByClassName('card-container')[0];
 
 // Render All Cards Function
-cardList.forEach((key, index) => {
-  let cityDetails = data[key];
-  let card = document.createElement('li');
-  card.setAttribute('class', 'card');
-  card.classList.add(`card-${index}`);
-  card.innerHTML = `<div class="card-title">
-      <h3>${cityDetails.cityName}</h3>
-      <h3>
-        <img
-          class="card-icon"
-          src=${getCardWeatherIcon(cityDetails.temperature)}
-          alt=""
-        />
-        ${cityDetails.temperature}
-      </h3>
-    </div>
-    <div class="card-content">
-      <h5 class="card-time">${getCardTime(cityDetails.dateAndTime)}</h5>
-      <h5 class="card-date">${getCardDate(cityDetails.dateAndTime)}</h5>
-      <p>
-        <img
-          class="card-icon"
-          src="./assets/htmlcss/Weather Icons/humidityIcon.svg"
-          alt=""
-        />
-        ${cityDetails.humidity}
-      </p>
-      <p>
-        <img
-          class="card-icon"
-          src="./assets/htmlcss/Weather Icons/precipitationIcon.svg"
-          alt=""
-        />
-        ${cityDetails.precipitation}
-      </p>
-    </div>`;
-  card.style.backgroundImage = `url('../assets/htmlcss/Icons for cities/${key}.svg')`;
-  cardContainer.appendChild(card);
-});
 
 // Display Number Change
 displayNumber.addEventListener('change', () => {
@@ -621,36 +507,6 @@ const isOverflow = () => {
 let contGrid = document.getElementsByClassName('cont-grid')[0];
 
 // Render All Grid Items
-cardList.forEach((key, index) => {
-  let cityDetails = data[key];
-  let contItem = document.createElement('li');
-  contItem.setAttribute('class', 'cont-item');
-  contItem.innerHTML = `<div class="cont-item-title">
-      <div class="cont-name">${cityDetails.timeZone.split('/')[0]}</div>
-      <div class="cont-temp">
-        <img
-          class="cont-temp-icon"
-          src=${getWeatherIcon(parseInt(cityDetails.temperature.split('°')[0]))}
-          alt=""
-        />
-        ${cityDetails.temperature}
-      </div>
-    </div>
-    <div class="cont-content">
-      <div class="cont-city-name">${cityDetails.cityName},&nbsp;${getCardTime(
-    cityDetails.dateAndTime
-  )}</div>
-      <div class="cont-humidity">
-        <img
-          src="./assets/htmlcss/Weather Icons/humidityIcon.svg"
-          alt=""
-          class="cont-humidity-icon"
-        />
-        ${cityDetails.humidity}
-      </div>
-    </div>`;
-  contGrid.appendChild(contItem);
-});
 
 // Grid Sort Controls Listener
 let contNameSort = document.getElementById('cont-name-sort');
