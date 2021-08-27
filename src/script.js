@@ -16,7 +16,10 @@ fetch('https://soliton.glitch.me/all-timezone-cities', requestOptions)
   .then((res) => initialise())
   .catch((error) => console.log('error', error));
 
-//Fetching Next Five Hour Values of Cities
+/**
+ * @desc Fetching Next Five Hour Values of Cities
+ * @param {String} cityName Current Selected City Name
+ */
 function getNextValues(cityName) {
   var requestOptionsCityName = {
     method: 'GET',
@@ -133,7 +136,7 @@ class basePrototype {
 
 // City Constructor for having the properties of current selected city
 class SelectedCityClass extends basePrototype {
-  constructor(key, nextValues) {
+  constructor(key) {
     super();
     this.cityName = data[key].cityName;
     this.dateAndTime = data[key].dateAndTime;
@@ -145,10 +148,7 @@ class SelectedCityClass extends basePrototype {
   }
 }
 
-// Prototypical Inheritance to access the funtions
-// SelectedCityClass.prototype = new basePrototype();
-
-/*---------------------------------------------TOP SECTION-------------------------------------------------------*/
+/*---------------------------------------------RENDER SECTION-------------------------------------------------------*/
 
 let city = document.getElementById('city-input');
 let cityDrop = document.getElementById('city-dropdown');
@@ -156,9 +156,9 @@ let timeDisplay = document.getElementsByClassName('time-display');
 let selectedCity = null;
 let cardList;
 
-// Adding all cities in the dropdown
-
+// Render All Cards and Grid Items and Dropdown
 function initialise() {
+  // Adding all cities in the dropdown
   cardList = Object.keys(data);
   for (const cityKey in data) {
     let cityObject = data[cityKey];
@@ -166,6 +166,8 @@ function initialise() {
     cityElement.setAttribute('value', cityObject.cityName);
     cityDrop.appendChild(cityElement);
   }
+
+  //Render All Cards
   cardList.forEach((key, index) => {
     let cityDetails = data[key];
     let card = document.createElement('li');
@@ -205,6 +207,8 @@ function initialise() {
     card.style.backgroundImage = `url('../assets/htmlcss/Icons for cities/${key}.svg')`;
     cardContainer.appendChild(card);
   });
+
+  //Render All GRid Items
   cardList.forEach((key, index) => {
     let cityDetails = data[key];
     let contItem = document.createElement('li');
@@ -239,6 +243,8 @@ function initialise() {
   });
 }
 
+/*---------------------------------------------TOP SECTION-------------------------------------------------------*/
+
 city.addEventListener('focus', () => {
   city.value = '';
 });
@@ -265,10 +271,19 @@ city.addEventListener('change', () => {
   city.blur();
 });
 
-// Util Functions for Date and Temperature
+/**
+ * @desc Convert Temperature from Celsius to Fahrenheit
+ * @param {String} tempInC Temperature in Degree Celsius
+ * @returns {Integer} Temperature in Fahrenheit
+ */
 const tempCtoF = (tempInC) =>
   Math.floor((parseInt(tempInC.split('°')[0]) * 9) / 5 + 32);
 
+/**
+ * @desc Formatting Input String
+ * @param {String} date City Date
+ * @returns {String} Formatted Date
+ */
 const getDate = (date) => {
   [month, day, year] = [...date.slice(0, -1).split('/')];
   let months = [
@@ -288,6 +303,13 @@ const getDate = (date) => {
   return `${day}-${months[parseInt(month) - 1]}-${year}`;
 };
 
+/**
+ * @desc To get all the time values for the timeline
+ * @param {Integer} i The i'th value in timeline which needs to be calculated
+ * @param {String} hours The Current Time in the City
+ * @param {String} mState The Current AM or PM State
+ * @returns Formatted time for i'th value
+ */
 const getTimelineTime = (i, hours, mState) => {
   let acthours = parseInt(hours);
   hours = acthours + i;
@@ -302,6 +324,11 @@ const getTimelineTime = (i, hours, mState) => {
   return `${hours} ${mState}`;
 };
 
+/**
+ * @desc For getting the source url of weather icon
+ * @param {Integer} temp Temperature of the City
+ * @returns {String} the source url of the weather icon for input temperature
+ */
 const getWeatherIcon = (temp) =>
   `./assets/htmlcss/Weather%20Icons/${
     temp < 0
@@ -328,6 +355,10 @@ buttonLeft.onclick = function () {
   slide('left');
 };
 
+/**
+ * Slides the Container in the direction specified
+ * @param {String} direction Direction of Sliding Left or Right
+ */
 const slide = (direction) => {
   let container = document.getElementsByClassName('card-container')[0];
   scrollCompleted = 0;
@@ -344,7 +375,11 @@ const slide = (direction) => {
   }, 50);
 };
 
-// Util Functions for Card Data
+/**
+ * @desc For getting src URL of the weather icon
+ * @param {String} temp Temperture for which Icon is needed
+ * @returns {String} Source URL for the weather icon for Input temperature
+ */
 const getCardWeatherIcon = (temp) => {
   let temper = parseInt(temp.split('°')[0]);
   return `./assets/htmlcss/Weather%20Icons/${
@@ -352,12 +387,22 @@ const getCardWeatherIcon = (temp) => {
   }.svg`;
 };
 
+/**
+ * @desc Formatting Card Time
+ * @param {String} datetime Unformatted Date and Time String
+ * @returns {String} Formatted String for Card Time
+ */
 const getCardTime = (datetime) => {
   [date, time, mState] = [...datetime.split(' ')];
   [hours, minutes, seconds] = [...time.split(':')];
   return `${hours}:${minutes}&nbsp;${mState}`;
 };
 
+/**
+ * Formatting Date for Cards
+ * @param {String} datetime Unformatted Date and Time String
+ * @returns {String} Formatted Date for Card
+ */
 const getCardDate = (datetime) => {
   [date, time, mState] = [...datetime.split(' ')];
   [hours, minutes, seconds] = [...time.split(':')];
@@ -368,8 +413,6 @@ let displayNumber = document.getElementById('display-number');
 var length = displayNumber.value;
 var weather;
 let cardContainer = document.getElementsByClassName('card-container')[0];
-
-// Render All Cards Function
 
 // Display Number Change
 displayNumber.addEventListener('change', () => {
@@ -505,8 +548,6 @@ const isOverflow = () => {
 /*---------------------------------------------BOTTOM SECTION-------------------------------------------------------*/
 
 let contGrid = document.getElementsByClassName('cont-grid')[0];
-
-// Render All Grid Items
 
 // Grid Sort Controls Listener
 let contNameSort = document.getElementById('cont-name-sort');
