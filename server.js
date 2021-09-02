@@ -1,13 +1,9 @@
 const express = require('express');
-var axios = require('axios');
-
+const api = require('./public/assets/Node JS/timeZone');
 const app = express();
 
 app.use(express.static('public'));
 app.use(express.json());
-
-// app.set('views', './views');
-// app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
   res.render('index');
@@ -16,54 +12,19 @@ app.get('/', (req, res) => {
 let data, nextFiveHrs;
 
 app.post('/all-data', (req, res) => {
-  var configAllData = {
-    method: 'get',
-    url: 'https://soliton.glitch.me/all-timezone-cities',
-    headers: {},
-  };
-  axios(configAllData)
-    .then(function (response) {
-      data = response.data;
-      res.json(data);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+  data = api.allTimeZones();
+  res.json(data);
 });
 
 app.post('/next-five-hours', (req, res) => {
   const cityName = req.body.cityName;
-  var configCityName = {
-    method: 'get',
-    url: `https://soliton.glitch.me?city=${cityName}`,
-    headers: {},
-  };
-  axios(configCityName)
-    .then(function (response) {
-      let resObj = response.data;
-      var raw = JSON.stringify({ ...resObj, hours: 4 });
-
-      var config = {
-        method: 'post',
-        url: 'https://soliton.glitch.me/hourly-forecast',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        data: raw,
-      };
-
-      axios(config)
-        .then(function (resp) {
-          nextFiveHrs = resp.data;
-          res.json(resp.data);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+  let cityDateTimeObj = api.timeForOneCity('Nome');
+  let nextFiveHrs = api.nextNhoursWeather(
+    cityDateTimeObj.city_Date_Time_Name,
+    4,
+    data
+  );
+  res.json(nextFiveHrs);
 });
 
 app.listen(process.env.PORT || 3030, () =>

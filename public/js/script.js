@@ -1,20 +1,6 @@
 /*------------------------------------------------DATA-------------------------------------------------------*/
+
 //Fetching Data of all timezone and cities
-// var requestOptions = {
-//   method: 'GET',
-//   redirect: 'follow',
-// };
-
-// let data = {};
-// fetch('https://soliton.glitch.me/all-timezone-cities', requestOptions)
-//   .then((response) => response.text())
-//   .then((result) => JSON.parse(result))
-//   .then((jData) =>
-//     jData.forEach((item) => (data[item.cityName.toLowerCase()] = item))
-//   )
-//   .then((res) => initialise())
-//   .catch((error) => console.log('error', error));
-
 var requestOptions = {
   method: 'POST',
   redirect: 'follow',
@@ -29,6 +15,10 @@ fetch('/all-data', requestOptions)
   .then((res) => initialise())
   .catch((error) => console.log('error', error));
 
+/**
+ * @desc Fetching Next Five Hour Values of Cities
+ * @param {String} cityName Current Selected City Name
+ */
 function getNextValues(cityName) {
   var requestOptionsNext = {
     method: 'POST',
@@ -44,44 +34,6 @@ function getNextValues(cityName) {
     .then((res) => selectedCity.changeTimeline())
     .catch((error) => console.log('error', error));
 }
-
-/**
- * @desc Fetching Next Five Hour Values of Cities
- * @param {String} cityName Current Selected City Name
- */
-// function getNextValues(cityName) {
-//   var requestOptionsCityName = {
-//     method: 'GET',
-//     redirect: 'follow',
-//   };
-//   let url = `https://soliton.glitch.me?city=${cityName}`;
-//   fetch(url, requestOptionsCityName)
-//     .then((response) => response.text())
-//     .then((result) => fetchNextValues(JSON.parse(result)))
-//     .catch((error) => console.log('error', error));
-// }
-
-// function fetchNextValues(resObj) {
-//   var myHeaders = new Headers();
-//   myHeaders.append('Content-Type', 'application/json');
-
-//   var raw = JSON.stringify({ ...resObj, hours: 4 });
-
-//   var requestOptionsNextValues = {
-//     method: 'POST',
-//     headers: myHeaders,
-//     body: raw,
-//     redirect: 'follow',
-//   };
-
-//   fetch('https://soliton.glitch.me/hourly-forecast', requestOptionsNextValues)
-//     .then((response) => response.text())
-//     .then(
-//       (result) => (selectedCity.nextFiveHrs = JSON.parse(result).temperature)
-//     )
-//     .then((res) => selectedCity.changeTimeline())
-//     .catch((error) => console.log('error', error));
-// }
 
 /*---------------------------------------------OOP SECTION-------------------------------------------------------*/
 
