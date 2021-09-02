@@ -1,32 +1,37 @@
+// Importing Modules
 const express = require('express');
-const api = require('./public/assets/Node JS/timeZone');
+const { fork } = require('child_process');
 const app = express();
 
 app.use(express.static('public'));
 app.use(express.json());
 
+// Rendering index.html when / route is called
 app.get('/', (req, res) => {
   res.render('index');
 });
 
-let data, nextFiveHrs;
+// Creating Child Process using fork method
+const child = fork('./thread.js');
 
+// post route for getting all data
 app.post('/all-data', (req, res) => {
-  data = api.allTimeZones();
-  res.json(data);
+  child.send('all-data');
+  child.on('message', (allData) => {
+    res.json(allData);
+  });
 });
 
+// post route for getting next five hours for selected city
 app.post('/next-five-hours', (req, res) => {
   const cityName = req.body.cityName;
-  let cityDateTimeObj = api.timeForOneCity('Nome');
-  let nextFiveHrs = api.nextNhoursWeather(
-    cityDateTimeObj.city_Date_Time_Name,
-    4,
-    data
-  );
-  res.json(nextFiveHrs);
+  child.send({ city: cityName });
+  child.on('message', (nextData) => {
+    res.json(nextData);
+  });
 });
 
+// App listening on Port 3030
 app.listen(process.env.PORT || 3030, () =>
   console.log('listening on port 3030')
 );
