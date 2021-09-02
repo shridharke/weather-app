@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather App</title>
-    <link rel="stylesheet" href="./src/styles.css" />
+    <link rel="stylesheet" href="./src/css/styles.css" />
     <link
       rel="icon"
       type="image/svg+xml"
@@ -13,57 +13,59 @@
     />
   </head>
   <body>
+    <!-- Background Image -->
     <img
       src="./assets/htmlcss/General Images & Icons/background.svg"
       class="bg-image-1 bg-image"
       alt="background image"
     />
+
+    <!---------------------------------------- TOP SECTION ------------------------------------------->
     <header class="city-weather-header">
+      <!-- City Selector -->
       <div class="col-3 col-s-6 header-item header-item-1">
+        <!-- City Input -->
         <div class="city-select-div">
           <img
             src="./assets/htmlcss/Icons for cities/perth.svg"
             class="city-icon"
-            alt="Perth Icon"
+            alt="City Icon"
           />
-          <select name="cities" id="city-dropdown">
-            <option value="perth">Perth</option>
-            <option value="newyork">New York</option>
-            <option value="vienna">Vienna</option>
-          </select>
+          <input list="city-dropdown" name="city-input" id="city-input" />
+          <datalist name="cities" id="city-dropdown"> </datalist>
         </div>
+        <!-- Clock -->
         <div class="date-time-display">
-          <p class="time-display">
-            10:44:<small>55</small>
-            <img
-              class="am-state-icon"
-              src="./assets/htmlcss/General Images & Icons/amState.svg"
-              alt="AM"
-            />
-          </p>
-          <p class="date-display">21-July-2021</p>
+          <p class="time-display">Select a City</p>
+          <p class="date-display"></p>
         </div>
       </div>
+      <!-- Temperature Grid -->
       <div class="col-3 col-s-6 header-item header-item-2">
+        <!-- Temp in C -->
         <div class="temperature values-div">
           <h5>Temp &deg;C</h5>
-          <p>35 &deg;C</p>
+          <p class="tempC">NIL</p>
         </div>
+        <!-- Humidity -->
         <div class="humidity values-div">
           <h5>Humidity</h5>
-          <p>26%</p>
+          <p class="humiValue">NIL</p>
         </div>
+        <!-- Temp in F -->
         <div class="temperature values-div">
           <h5>Temp &deg;F</h5>
-          <p>78 &deg;F</p>
+          <p class="tempF">NIL</p>
         </div>
+        <!-- Precipitation -->
         <div class="precipitation values-div">
           <h5>Precipitation</h5>
-          <p>0%</p>
+          <p class="preciValue">NIL</p>
         </div>
       </div>
+      <!-- Timeline -->
       <div class="col-6 col-s-12 header-item header-item-3">
-        <div class="timeline-item timeline-item-1">
+        <div class="timeline-item">
           <p class="timeline-time">NOW</p>
           <p class="timeline-bar">|</p>
           <img
@@ -73,7 +75,7 @@
           />
           <p class="timeline-number">6</p>
         </div>
-        <div class="timeline-item timeline-item-2">
+        <div class="timeline-item">
           <p class="timeline-time">11 AM</p>
           <p class="timeline-bar">|</p>
           <img
@@ -83,7 +85,7 @@
           />
           <p class="timeline-number">7</p>
         </div>
-        <div class="timeline-item timeline-item-3">
+        <div class="timeline-item">
           <p class="timeline-time">12 PM</p>
           <p class="timeline-bar">|</p>
           <img
@@ -93,7 +95,7 @@
           />
           <p class="timeline-number">7</p>
         </div>
-        <div class="timeline-item timeline-item-4">
+        <div class="timeline-item">
           <p class="timeline-time">1 PM</p>
           <p class="timeline-bar">|</p>
           <img
@@ -103,7 +105,7 @@
           />
           <p class="timeline-number">8</p>
         </div>
-        <div class="timeline-item timeline-item-5">
+        <div class="timeline-item">
           <p class="timeline-time">2 PM</p>
           <p class="timeline-bar">|</p>
           <img
@@ -113,43 +115,40 @@
           />
           <p class="timeline-number">6</p>
         </div>
-        <div class="timeline-item timeline-item-6">
-          <p class="timeline-time">3 PM</p>
-          <p class="timeline-bar">|</p>
-          <img
-            class="timeline-icon"
-            src="./assets/htmlcss/Weather Icons/cloudyIcon.svg"
-            alt=""
-          />
-          <p class="timeline-number">6</p>
-        </div>
       </div>
     </header>
+
+    <!---------------------------------------- MIDDLE SECTION ------------------------------------------->
     <section class="weather-list">
+      <!-- Section Header -->
       <div class="navbar row">
+        <!-- Section Title -->
         <div class="col-8 col-s-6 nav-title">Top Cities around the World</div>
+        <!-- Filter Controls -->
         <div class="col-4 col-s-6 nav-container">
-          <div class="nav-item selected">
+          <!-- Filter Icons -->
+          <div class="nav-item selected" id="sunny-select">
             <img
               class="nav-icon"
               src="./assets/htmlcss/Weather Icons/sunnyIcon.svg"
               alt=""
             />
           </div>
-          <div class="nav-item">
+          <div class="nav-item" id="snowflake-select">
             <img
               class="nav-icon"
               src="./assets/htmlcss/Weather Icons/snowflakeIcon.svg"
               alt=""
             />
           </div>
-          <div class="nav-item">
+          <div class="nav-item" id="rainy-select">
             <img
               class="nav-icon"
               src="./assets/htmlcss/Weather Icons/rainyIcon.svg"
               alt=""
             />
           </div>
+          <!-- Display Number -->
           <div class="nav-item">
             <label for="display-number">Display Top</label>
           </div>
@@ -165,177 +164,20 @@
           </div>
         </div>
       </div>
+      <!-- Slider Container -->
       <div class="slider-container">
-        <div class="left-arrow-div">
+        <!-- Left Arrow -->
+        <div class="left-arrow-div" id="slide-left">
           <img
             class="left-arrow"
             src="./assets/htmlcss/General Images & Icons/arrowUp.svg"
             alt=""
           />
         </div>
-        <ul class="card-container">
-          <li class="card">
-            <div class="card-title">
-              <h3>Perth</h3>
-              <h3>
-                <img
-                  class="card-icon"
-                  src="./assets/htmlcss/Weather Icons/sunnyIcon.svg"
-                  alt=""
-                />
-                25&nbsp;&deg;C
-              </h3>
-            </div>
-            <div class="card-content">
-              <h5>10:00 AM</h5>
-              <h5>21-July-2021</h5>
-              <p>
-                <img
-                  class="card-icon"
-                  src="./assets/htmlcss/Weather Icons/humidityIcon.svg"
-                  alt=""
-                />
-                53%
-              </p>
-              <p>
-                <img
-                  class="card-icon"
-                  src="./assets/htmlcss/Weather Icons/precipitationIcon.svg"
-                  alt=""
-                />
-                10%
-              </p>
-            </div>
-            <div class="card-city-icon-div">
-              <!-- <img
-                class="card-city-icon"
-                src="./assets/htmlcss/Icons for cities/perth.svg"
-                alt=""
-              /> -->
-            </div>
-          </li>
-          <li class="card">
-            <div class="card-title">
-              <h3>Perth</h3>
-              <h3>
-                <img
-                  class="card-icon"
-                  src="./assets/htmlcss/Weather Icons/sunnyIcon.svg"
-                  alt=""
-                />
-                25&nbsp;&deg;C
-              </h3>
-            </div>
-            <div class="card-content">
-              <h5>10:00 AM</h5>
-              <h5>21-July-2021</h5>
-              <p>
-                <img
-                  class="card-icon"
-                  src="./assets/htmlcss/Weather Icons/humidityIcon.svg"
-                  alt=""
-                />
-                53%
-              </p>
-              <p>
-                <img
-                  class="card-icon"
-                  src="./assets/htmlcss/Weather Icons/precipitationIcon.svg"
-                  alt=""
-                />
-                10%
-              </p>
-            </div>
-            <div class="card-city-icon-div">
-              <!-- <img
-                class="card-city-icon"
-                src="./assets/htmlcss/Icons for cities/perth.svg"
-                alt=""
-              /> -->
-            </div>
-          </li>
-          <li class="card">
-            <div class="card-title">
-              <h3>Perth</h3>
-              <h3>
-                <img
-                  class="card-icon"
-                  src="./assets/htmlcss/Weather Icons/sunnyIcon.svg"
-                  alt=""
-                />
-                25&nbsp;&deg;C
-              </h3>
-            </div>
-            <div class="card-content">
-              <h5>10:00 AM</h5>
-              <h5>21-July-2021</h5>
-              <p>
-                <img
-                  class="card-icon"
-                  src="./assets/htmlcss/Weather Icons/humidityIcon.svg"
-                  alt=""
-                />
-                53%
-              </p>
-              <p>
-                <img
-                  class="card-icon"
-                  src="./assets/htmlcss/Weather Icons/precipitationIcon.svg"
-                  alt=""
-                />
-                10%
-              </p>
-            </div>
-            <div class="card-city-icon-div">
-              <!-- <img
-                class="card-city-icon"
-                src="./assets/htmlcss/Icons for cities/perth.svg"
-                alt=""
-              /> -->
-            </div>
-          </li>
-          <li class="card">
-            <div class="card-title">
-              <h3>Perth</h3>
-              <h3>
-                <img
-                  class="card-icon"
-                  src="./assets/htmlcss/Weather Icons/sunnyIcon.svg"
-                  alt=""
-                />
-                25&nbsp;&deg;C
-              </h3>
-            </div>
-            <div class="card-content">
-              <h5>10:00 AM</h5>
-              <h5>21-July-2021</h5>
-              <p>
-                <img
-                  class="card-icon"
-                  src="./assets/htmlcss/Weather Icons/humidityIcon.svg"
-                  alt=""
-                />
-                53%
-              </p>
-              <p>
-                <img
-                  class="card-icon"
-                  src="./assets/htmlcss/Weather Icons/precipitationIcon.svg"
-                  alt=""
-                />
-                10%
-              </p>
-            </div>
-            <div class="card-city-icon-div">
-              <!-- <img
-                class="card-city-icon"
-                src="./assets/htmlcss/Icons for cities/perth.svg"
-                alt=""
-              /> -->
-            </div>
-          </li>
-        </ul>
-        <div class="right-arrow-div">
+        <!-- Card Container -->
+        <ul class="card-container"></ul>
+        <!-- Right Arrow -->
+        <div class="right-arrow-div" id="slide-right">
           <img
             class="right-arrow"
             src="./assets/htmlcss/General Images & Icons/arrowUp.svg"
@@ -344,316 +186,41 @@
         </div>
       </div>
     </section>
+
+    <!---------------------------------------- BOTTOM SECTION ------------------------------------------->
     <section class="cont-list">
+      <!-- Section Header -->
       <div class="cont-header">
+        <!-- Section Title -->
         <div class="cont-title">Cities across continents at a Glance</div>
+        <!-- Sort Controls -->
         <div class="sort-controls">
-          <div class="cont-sort">
-            Continent&nbsp;Name&nbsp;<img
-              class="cont-sort-icon"
-              src="./assets/htmlcss/General Images & Icons/downArrow.svg"
-              alt=""
-            />
-          </div>
-          <div class="temp-sort">
-            Temperature&nbsp;<img
+          <div class="cont-sort" id="cont-name-sort">
+            Continent&nbsp;Name
+            <img
               class="cont-sort-icon"
               src="./assets/htmlcss/General Images & Icons/upArrow.svg"
               alt=""
+              id="cont-name-sort-icon"
+            />
+          </div>
+          <div class="temp-sort" id="temp-sort">
+            Temperature
+            <img
+              class="cont-sort-icon"
+              src="./assets/htmlcss/General Images & Icons/downArrow.svg"
+              alt=""
+              id="temp-sort-icon"
             />
           </div>
         </div>
       </div>
-      <ul class="cont-grid">
-        <li class="cont-item">
-          <div class="cont-item-title">
-            <div class="cont-name">Asia</div>
-            <div class="cont-temp">
-              <img
-                class="cont-temp-icon"
-                src="./assets/htmlcss/Weather Icons/sunnyIcon.svg"
-                alt=""
-              />
-              25&nbsp;&deg;C
-            </div>
-          </div>
-          <div class="cont-content">
-            <div class="cont-city-name">Delhi,&nbsp;10:10&nbsp;AM</div>
-            <div class="cont-humidity">
-              <img
-                src="./assets/htmlcss/Weather Icons/humidityIcon.svg"
-                alt=""
-                class="cont-humidity-icon"
-              />
-              53%
-            </div>
-          </div>
-        </li>
-        <li class="cont-item">
-          <div class="cont-item-title">
-            <div class="cont-name">Asia</div>
-            <div class="cont-temp">
-              <img
-                class="cont-temp-icon"
-                src="./assets/htmlcss/Weather Icons/sunnyIcon.svg"
-                alt=""
-              />
-              25&nbsp;&deg;C
-            </div>
-          </div>
-          <div class="cont-content">
-            <div class="cont-city-name">Delhi,&nbsp;10:10&nbsp;AM</div>
-            <div class="cont-humidity">
-              <img
-                src="./assets/htmlcss/Weather Icons/humidityIcon.svg"
-                alt=""
-                class="cont-humidity-icon"
-              />
-              53%
-            </div>
-          </div>
-        </li>
-        <li class="cont-item">
-          <div class="cont-item-title">
-            <div class="cont-name">Asia</div>
-            <div class="cont-temp">
-              <img
-                class="cont-temp-icon"
-                src="./assets/htmlcss/Weather Icons/sunnyIcon.svg"
-                alt=""
-              />
-              25&nbsp;&deg;C
-            </div>
-          </div>
-          <div class="cont-content">
-            <div class="cont-city-name">Delhi,&nbsp;10:10&nbsp;AM</div>
-            <div class="cont-humidity">
-              <img
-                src="./assets/htmlcss/Weather Icons/humidityIcon.svg"
-                alt=""
-                class="cont-humidity-icon"
-              />
-              53%
-            </div>
-          </div>
-        </li>
-        <li class="cont-item">
-          <div class="cont-item-title">
-            <div class="cont-name">Asia</div>
-            <div class="cont-temp">
-              <img
-                class="cont-temp-icon"
-                src="./assets/htmlcss/Weather Icons/sunnyIcon.svg"
-                alt=""
-              />
-              25&nbsp;&deg;C
-            </div>
-          </div>
-          <div class="cont-content">
-            <div class="cont-city-name">Delhi,&nbsp;10:10&nbsp;AM</div>
-            <div class="cont-humidity">
-              <img
-                src="./assets/htmlcss/Weather Icons/humidityIcon.svg"
-                alt=""
-                class="cont-humidity-icon"
-              />
-              53%
-            </div>
-          </div>
-        </li>
-        <li class="cont-item">
-          <div class="cont-item-title">
-            <div class="cont-name">Asia</div>
-            <div class="cont-temp">
-              <img
-                class="cont-temp-icon"
-                src="./assets/htmlcss/Weather Icons/sunnyIcon.svg"
-                alt=""
-              />
-              25&nbsp;&deg;C
-            </div>
-          </div>
-          <div class="cont-content">
-            <div class="cont-city-name">Delhi,&nbsp;10:10&nbsp;AM</div>
-            <div class="cont-humidity">
-              <img
-                src="./assets/htmlcss/Weather Icons/humidityIcon.svg"
-                alt=""
-                class="cont-humidity-icon"
-              />
-              53%
-            </div>
-          </div>
-        </li>
-        <li class="cont-item">
-          <div class="cont-item-title">
-            <div class="cont-name">Asia</div>
-            <div class="cont-temp">
-              <img
-                class="cont-temp-icon"
-                src="./assets/htmlcss/Weather Icons/sunnyIcon.svg"
-                alt=""
-              />
-              25&nbsp;&deg;C
-            </div>
-          </div>
-          <div class="cont-content">
-            <div class="cont-city-name">Delhi,&nbsp;10:10&nbsp;AM</div>
-            <div class="cont-humidity">
-              <img
-                src="./assets/htmlcss/Weather Icons/humidityIcon.svg"
-                alt=""
-                class="cont-humidity-icon"
-              />
-              53%
-            </div>
-          </div>
-        </li>
-        <li class="cont-item">
-          <div class="cont-item-title">
-            <div class="cont-name">Asia</div>
-            <div class="cont-temp">
-              <img
-                class="cont-temp-icon"
-                src="./assets/htmlcss/Weather Icons/sunnyIcon.svg"
-                alt=""
-              />
-              25&nbsp;&deg;C
-            </div>
-          </div>
-          <div class="cont-content">
-            <div class="cont-city-name">Delhi,&nbsp;10:10&nbsp;AM</div>
-            <div class="cont-humidity">
-              <img
-                src="./assets/htmlcss/Weather Icons/humidityIcon.svg"
-                alt=""
-                class="cont-humidity-icon"
-              />
-              53%
-            </div>
-          </div>
-        </li>
-        <li class="cont-item">
-          <div class="cont-item-title">
-            <div class="cont-name">Asia</div>
-            <div class="cont-temp">
-              <img
-                class="cont-temp-icon"
-                src="./assets/htmlcss/Weather Icons/sunnyIcon.svg"
-                alt=""
-              />
-              25&nbsp;&deg;C
-            </div>
-          </div>
-          <div class="cont-content">
-            <div class="cont-city-name">Delhi,&nbsp;10:10&nbsp;AM</div>
-            <div class="cont-humidity">
-              <img
-                src="./assets/htmlcss/Weather Icons/humidityIcon.svg"
-                alt=""
-                class="cont-humidity-icon"
-              />
-              53%
-            </div>
-          </div>
-        </li>
-        <li class="cont-item">
-          <div class="cont-item-title">
-            <div class="cont-name">Asia</div>
-            <div class="cont-temp">
-              <img
-                class="cont-temp-icon"
-                src="./assets/htmlcss/Weather Icons/sunnyIcon.svg"
-                alt=""
-              />
-              25&nbsp;&deg;C
-            </div>
-          </div>
-          <div class="cont-content">
-            <div class="cont-city-name">Delhi,&nbsp;10:10&nbsp;AM</div>
-            <div class="cont-humidity">
-              <img
-                src="./assets/htmlcss/Weather Icons/humidityIcon.svg"
-                alt=""
-                class="cont-humidity-icon"
-              />
-              53%
-            </div>
-          </div>
-        </li>
-        <li class="cont-item">
-          <div class="cont-item-title">
-            <div class="cont-name">Asia</div>
-            <div class="cont-temp">
-              <img
-                class="cont-temp-icon"
-                src="./assets/htmlcss/Weather Icons/sunnyIcon.svg"
-                alt=""
-              />
-              25&nbsp;&deg;C
-            </div>
-          </div>
-          <div class="cont-content">
-            <div class="cont-city-name">Delhi,&nbsp;10:10&nbsp;AM</div>
-            <div class="cont-humidity">
-              <img
-                src="./assets/htmlcss/Weather Icons/humidityIcon.svg"
-                alt=""
-                class="cont-humidity-icon"
-              />
-              53%
-            </div>
-          </div>
-        </li>
-        <li class="cont-item">
-          <div class="cont-item-title">
-            <div class="cont-name">Asia</div>
-            <div class="cont-temp">
-              <img
-                class="cont-temp-icon"
-                src="./assets/htmlcss/Weather Icons/sunnyIcon.svg"
-                alt=""
-              />
-              25&nbsp;&deg;C
-            </div>
-          </div>
-          <div class="cont-content">
-            <div class="cont-city-name">Delhi,&nbsp;10:10&nbsp;AM</div>
-            <div class="cont-humidity">
-              <img
-                src="./assets/htmlcss/Weather Icons/humidityIcon.svg"
-                alt=""
-                class="cont-humidity-icon"
-              />
-              53%
-            </div>
-          </div>
-        </li>
-        <li class="cont-item">
-          <div class="cont-item-title">
-            <div class="cont-name">Asia</div>
-            <div class="cont-temp">
-              <img
-                class="cont-temp-icon"
-                src="./assets/htmlcss/Weather Icons/sunnyIcon.svg"
-                alt=""
-              />
-              25&nbsp;&deg;C
-            </div>
-          </div>
-          <div class="cont-content">
-            <div class="cont-city-name">Delhi,&nbsp;10:10&nbsp;AM</div>
-            <div class="cont-humidity">
-              <img
-                src="./assets/htmlcss/Weather Icons/humidityIcon.svg"
-                alt=""
-                class="cont-humidity-icon"
-              />
-              53%
-            </div>
-          </div>
-        </li>
-      </ul>
+      <!-- Continent Wise Grid -->
+      <ul class="cont-grid"></ul>
     </section>
+
+    <!-- SCRIPT TAGS -->
+    <!-- <script type="application/json" src="assets/data.json"></script> -->
+    <script type="text/javascript" src="src/script.js"></script>
   </body>
 </html>

@@ -42,7 +42,7 @@
   justify-content: flex-start;
   align-items: flex-end;
 }
-select {
+#city-input {
   -webkit-appearance: button;
   -moz-appearance: button;
   -webkit-padding-end: 20px;
@@ -107,6 +107,7 @@ input[type='number'] {
 
 .city-icon {
   width: 5em;
+  margin-right: 1em;
 }
 
 .values-div {
@@ -263,7 +264,6 @@ option {
   padding: 20px;
   min-width: 300px;
   border-radius: 5px;
-  background-image: url(../assets/htmlcss/Icons\ for\ cities/perth.svg);
   background-position: bottom right;
   background-size: 8em;
   background-repeat: no-repeat;
@@ -313,22 +313,6 @@ p {
   font-weight: 400;
   margin-bottom: 15px;
 }
-
-/* .card-city-icon {
-  height: 7em;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  z-index: 0;
-} */
-
-/* .card-city-icon-div {
-  height: 7em;
-  background-image: url(../assets/htmlcss/Icons\ for\ cities/perth.svg);
-  background-position: bottom;
-  background-size: contain;
-  background-repeat: no-repeat;
-} */
 
 .cont-list {
   background-color: var(--pure-black);
@@ -408,25 +392,20 @@ p {
   font-weight: 300;
 }
 
-/* width */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
   background: var(--primary-black);
-  border-radius: 10px;
 }
 
-/* Handle */
 ::-webkit-scrollbar-thumb {
   background: #666;
   border-radius: 5px;
 }
 
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
@@ -522,9 +501,6 @@ p {
     width: 100%;
   }
 
-  /* .card {
-    margin-right: 15px;
-  } */
   .left-arrow,
   .right-arrow {
     padding: 0px 20px;
