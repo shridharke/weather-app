@@ -11,11 +11,9 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
-// Creating Child Process using fork method
-const child = fork('./thread.js');
-
 // post route for getting all data
 app.post('/all-data', (req, res) => {
+  const child = fork('./thread.js');
   child.send('all-data');
   child.on('message', (allData) => {
     res.json(allData);
@@ -25,6 +23,7 @@ app.post('/all-data', (req, res) => {
 // post route for getting next five hours for selected city
 app.post('/next-five-hours', (req, res) => {
   const cityName = req.body.cityName;
+  const child = fork('./thread.js');
   child.send({ city: cityName });
   child.on('message', (nextData) => {
     res.json(nextData);

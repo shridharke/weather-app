@@ -1,4 +1,4 @@
-const api = require('./public/assets/Node JS/timeZone');
+const api = require('time-zone-3012');
 
 /**
  * @desc Function for getting data for all cities
