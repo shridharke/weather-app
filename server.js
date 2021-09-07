@@ -12,12 +12,13 @@ app.get('/', (req, res) => {
 });
 
 // post route for getting all data
-app.post('/all-data', (req, res) => {
+app.get('/all-data', (req, res) => {
   const child = fork('./thread.js');
   child.send('all-data');
   child.on('message', (allData) => {
     res.json(allData);
   });
+  child.abort();
 });
 
 // post route for getting next five hours for selected city
@@ -28,6 +29,7 @@ app.post('/next-five-hours', (req, res) => {
   child.on('message', (nextData) => {
     res.json(nextData);
   });
+  child.abort();
 });
 
 // App listening on Port 3030

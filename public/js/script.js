@@ -2,7 +2,7 @@
 
 //Fetching Data of all timezone and cities
 var requestOptions = {
-  method: 'POST',
+  method: 'GET',
   redirect: 'follow',
 };
 
