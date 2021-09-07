@@ -34,4 +34,5 @@ process.on('message', (message) => {
     const nextData = getNextValues(city);
     process.send(nextData);
   }
+  process.kill(process.pid);
 });

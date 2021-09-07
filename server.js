@@ -18,7 +18,6 @@ app.get('/all-data', (req, res) => {
   child.on('message', (allData) => {
     res.json(allData);
   });
-  child.abort();
 });
 
 // post route for getting next five hours for selected city
@@ -29,7 +28,6 @@ app.post('/next-five-hours', (req, res) => {
   child.on('message', (nextData) => {
     res.json(nextData);
   });
-  child.abort();
 });
 
 // App listening on Port 3030
