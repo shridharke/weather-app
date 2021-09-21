@@ -1,0 +1,23 @@
+{
+  "name": "shridhar_webtips_assignments",
+  "version": "1.0.0",
+  "description": "Weather App",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://shridhar_elango@bitbucket.org/shridhar_elango/shridhar_webtips_assignments.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/shridhar_elango/shridhar_webtips_assignments#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.12",
+    "time-zone-3012": "^1.0.0"
+  }
+}
